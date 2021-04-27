@@ -62,7 +62,7 @@ namespace SmartCommerce.Application
                 {
                     Version = "v1",
                     Title = "SmartCommerce Services",
-                    Description = "API para do SmartCommerce"
+                    Description = "API do SmartCommerce"
                 });
 
                 var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
@@ -70,13 +70,7 @@ namespace SmartCommerce.Application
                 c.IncludeXmlComments(xmlPath);
             });
             #endregion
-
-            //services.AddSingleton(new MapperConfiguration(config =>
-            //{
-            //    config.CreateMap<CreateUserModel, User>();
-            //    config.CreateMap<UpdateUserModel, User>();
-            //    config.CreateMap<User, UserModel>();
-            //}).CreateMapper());
+            
         }
 
 
@@ -91,7 +85,7 @@ namespace SmartCommerce.Application
 
             app.UseSwaggerUI(c =>
             {
-                c.SwaggerEndpoint("/swagger/v1/swagger.json", "Cyrela Services V1");
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "Smart Commerce Services V1");
             });
 
             app.UseHttpsRedirection();
