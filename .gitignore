@@ -348,3 +348,5 @@ MigrationBackup/
 
 # Ionide (cross platform F# VS Code tools) working folder
 .ionide/
+/SmartCommerce.Application/appsettings.json
+/SmartCommerce.Application/appsettings.Development.json
