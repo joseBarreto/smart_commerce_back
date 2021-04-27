@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System;
+using System.Net;
 
 namespace SmartCommerce.Application.Controllers
 {
@@ -23,7 +24,7 @@ namespace SmartCommerce.Application.Controllers
             }
             catch (Exception ex)
             {
-                return BadRequest(ex);
+                return StatusCode((int)HttpStatusCode.InternalServerError, ex.ToString());
             }
         }
     }
