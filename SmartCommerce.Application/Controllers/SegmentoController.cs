@@ -7,56 +7,53 @@ using System.Collections.Generic;
 namespace SmartCommerce.Application.Controllers
 {
     /// <summary>
-    /// Controle de usuários 
+    /// Controle de segmentos
     /// </summary>
     [ApiController]
     [Route("[controller]")]
-    public class UsuarioController : BaseController
+    public class SegmentoController : BaseController
     {
-        /// <summary>
-        /// Serviço de Usuário
-        /// </summary>
-        private readonly IBaseService<Usuario> _baseService;
+        private readonly IBaseService<Segmento> _baseService;
 
         /// <summary>
         /// Ctr
         /// </summary>
-        /// <param name="baseUserService"></param>
-        public UsuarioController(IBaseService<Usuario> baseUserService)
+        /// <param name="baseService"></param>
+        public SegmentoController(IBaseService<Segmento> baseService)
         {
-            _baseService = baseUserService;
+            _baseService = baseService;
         }
 
         /// <summary>
         /// Insere um novo registro
         /// </summary>
-        /// <param name="user">Modelo para inserir</param>
+        /// <param name="segmento">Modelo para inserir</param>
         /// <returns>Id do obj</returns>
-        [SwaggerResponse(200, "Ok", typeof(Usuario))]
+        [SwaggerResponse(200, "Ok", typeof(Segmento))]
         [SwaggerResponse(400, "Bad Request", typeof(string))]
         [HttpPost]
-        public IActionResult Create([FromBody] Usuario user)
+        public IActionResult Create([FromBody] Segmento segmento)
         {
-            if (user == null)
+            if (segmento == null)
                 return NotFound();
 
-            return Execute(() => _baseService.Add(user).Id);
+            return Execute(() => _baseService.Add(segmento).Id);
         }
 
         /// <summary>
         /// Atualiza um registro
         /// </summary>
-        /// <param name="user">Usuário com Id para atualização</param>
+        /// <param name="segmento">Usuário com Id para atualização</param>
         /// <returns>Modelo atualizado</returns>
-        [SwaggerResponse(200, "Ok", typeof(Usuario))]
+        [SwaggerResponse(200, "Ok", typeof(Segmento))]
         [SwaggerResponse(400, "Bad Request", typeof(string))]
         [HttpPut]
-        public IActionResult Update([FromBody] Usuario user)
+        public IActionResult Update([FromBody] Segmento segmento)
         {
-            if (user == null)
+            if (segmento == null)
                 return NotFound();
 
-            return Execute(() => _baseService.Update(user));
+            return Execute(() => _baseService.Update(segmento));
         }
 
         /// <summary>
@@ -83,7 +80,7 @@ namespace SmartCommerce.Application.Controllers
         /// Retorna uma lista de registros
         /// </summary>
         /// <returns></returns>
-        [SwaggerResponse(200, "Ok", typeof(IList<Usuario>))]
+        [SwaggerResponse(200, "Ok", typeof(IList<Segmento>))]
         [SwaggerResponse(400, "Bad Request", typeof(string))]
         [HttpGet]
         public IActionResult Get()
@@ -96,7 +93,7 @@ namespace SmartCommerce.Application.Controllers
         /// </summary>
         /// <param name="id">Identificador único</param>
         /// <returns></returns>
-        [SwaggerResponse(200, "Ok", typeof(Usuario))]
+        [SwaggerResponse(200, "Ok", typeof(Segmento))]
         [SwaggerResponse(400, "Bad Request", typeof(string))]
         [HttpGet("{id}")]
         public IActionResult Get(int id)
@@ -106,6 +103,5 @@ namespace SmartCommerce.Application.Controllers
 
             return Execute(() => _baseService.GetById(id));
         }
-
     }
 }

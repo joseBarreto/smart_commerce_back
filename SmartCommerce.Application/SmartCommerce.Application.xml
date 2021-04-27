@@ -16,12 +16,141 @@
             <param name="func">função para execução</param>
             <returns>Ok para sucesso e BadRequest para erros</returns>
         </member>
+        <member name="T:SmartCommerce.Application.Controllers.HealthCheckController">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:SmartCommerce.Application.Controllers.HealthCheckController.#ctor(SmartCommerce.Domain.Interfaces.IBaseService{SmartCommerce.Domain.Entities.Usuario})">
+            <summary>
+            
+            </summary>
+            <param name="baseUserService"></param>
+        </member>
+        <member name="M:SmartCommerce.Application.Controllers.HealthCheckController.Index">
+            <summary>
+            
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:SmartCommerce.Application.Controllers.HomeController">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:SmartCommerce.Application.Controllers.HomeController.Index">
+            <summary>
+            
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:SmartCommerce.Application.Controllers.LocalController">
+            <summary>
+            Controle de locais 
+            </summary>
+        </member>
+        <member name="F:SmartCommerce.Application.Controllers.LocalController._baseService">
+            <summary>
+            Serviço de Usuário
+            </summary>
+        </member>
+        <member name="M:SmartCommerce.Application.Controllers.LocalController.#ctor(SmartCommerce.Domain.Interfaces.ILocalService)">
+            <summary>
+            Ctr
+            </summary>
+            <param name="baseUserService"></param>
+        </member>
+        <member name="M:SmartCommerce.Application.Controllers.LocalController.Create(SmartCommerce.Domain.Entities.Local)">
+            <summary>
+            Insere um novo registro
+            </summary>
+            <param name="local">Modelo para inserir</param>
+            <returns>Id do obj</returns>
+        </member>
+        <member name="M:SmartCommerce.Application.Controllers.LocalController.Update(SmartCommerce.Domain.Entities.Local)">
+            <summary>
+            Atualiza um registro
+            </summary>
+            <param name="local">Usuário com Id para atualização</param>
+            <returns>Modelo atualizado</returns>
+        </member>
+        <member name="M:SmartCommerce.Application.Controllers.LocalController.Delete(System.Int32)">
+            <summary>
+            Remove um registro 
+            </summary>
+            <param name="id">Identificador</param>
+            <returns></returns>
+        </member>
+        <member name="M:SmartCommerce.Application.Controllers.LocalController.Get">
+            <summary>
+            Retorna uma lista de registros
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:SmartCommerce.Application.Controllers.LocalController.GetWithIncludes">
+            <summary>
+            Retorna uma lista de registros contento Usuários e Segmentos
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:SmartCommerce.Application.Controllers.LocalController.Get(System.Int32)">
+            <summary>
+            Procura um registro por Id
+            </summary>
+            <param name="id">Identificador único</param>
+            <returns></returns>
+        </member>
+        <member name="T:SmartCommerce.Application.Controllers.SegmentoController">
+            <summary>
+            Controle de segmentos
+            </summary>
+        </member>
+        <member name="M:SmartCommerce.Application.Controllers.SegmentoController.#ctor(SmartCommerce.Domain.Interfaces.IBaseService{SmartCommerce.Domain.Entities.Segmento})">
+            <summary>
+            Ctr
+            </summary>
+            <param name="baseService"></param>
+        </member>
+        <member name="M:SmartCommerce.Application.Controllers.SegmentoController.Create(SmartCommerce.Domain.Entities.Segmento)">
+            <summary>
+            Insere um novo registro
+            </summary>
+            <param name="segmento">Modelo para inserir</param>
+            <returns>Id do obj</returns>
+        </member>
+        <member name="M:SmartCommerce.Application.Controllers.SegmentoController.Update(SmartCommerce.Domain.Entities.Segmento)">
+            <summary>
+            Atualiza um registro
+            </summary>
+            <param name="segmento">Usuário com Id para atualização</param>
+            <returns>Modelo atualizado</returns>
+        </member>
+        <member name="M:SmartCommerce.Application.Controllers.SegmentoController.Delete(System.Int32)">
+            <summary>
+            Remove um registro 
+            </summary>
+            <param name="id">Identificador</param>
+            <returns></returns>
+        </member>
+        <member name="M:SmartCommerce.Application.Controllers.SegmentoController.Get">
+            <summary>
+            Retorna uma lista de registros
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:SmartCommerce.Application.Controllers.SegmentoController.Get(System.Int32)">
+            <summary>
+            Procura um registro por Id
+            </summary>
+            <param name="id">Identificador único</param>
+            <returns></returns>
+        </member>
         <member name="T:SmartCommerce.Application.Controllers.UsuarioController">
             <summary>
             Controle de usuários 
             </summary>
         </member>
-        <member name="F:SmartCommerce.Application.Controllers.UsuarioController._baseUserService">
+        <member name="F:SmartCommerce.Application.Controllers.UsuarioController._baseService">
             <summary>
             Serviço de Usuário
             </summary>
@@ -43,7 +172,7 @@
             <summary>
             Atualiza um registro
             </summary>
-            <param name="user">Usuario com Id para atualização</param>
+            <param name="user">Usuário com Id para atualização</param>
             <returns>Modelo atualizado</returns>
         </member>
         <member name="M:SmartCommerce.Application.Controllers.UsuarioController.Delete(System.Int32)">
@@ -63,7 +192,7 @@
             <summary>
             Procura um registro por Id
             </summary>
-            <param name="id">Identificador unico</param>
+            <param name="id">Identificador único</param>
             <returns></returns>
         </member>
     </members>

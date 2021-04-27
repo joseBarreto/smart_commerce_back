@@ -8,34 +8,34 @@ namespace SmartCommerce.Infra.Data.Repository
 {
     public class BaseRepository<TEntity> : IBaseRepository<TEntity> where TEntity : BaseEntity
     {
-        protected readonly SmartCommerceContext _mySqlContext;
+        protected readonly SmartCommerceContext _myOracleContext;
 
         public BaseRepository(SmartCommerceContext mySqlContext)
         {
-            _mySqlContext = mySqlContext;
+            _myOracleContext = mySqlContext;
         }
 
 
         public void Insert(TEntity obj)
         {
-            _mySqlContext.Set<TEntity>().Add(obj);
-            _mySqlContext.SaveChanges();
+            _myOracleContext.Set<TEntity>().Add(obj);
+            _myOracleContext.SaveChanges();
         }
 
         public void Update(TEntity obj)
         {
-            _mySqlContext.Entry(obj).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
-            _mySqlContext.SaveChanges();
+            _myOracleContext.Entry(obj).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
+            _myOracleContext.SaveChanges();
         }
 
         public void Delete(int id)
         {
-            _mySqlContext.Set<TEntity>().Remove(Select(id));
-            _mySqlContext.SaveChanges();
+            _myOracleContext.Set<TEntity>().Remove(Select(id));
+            _myOracleContext.SaveChanges();
         }
 
-        public IList<TEntity> Select() => _mySqlContext.Set<TEntity>().ToList();
+        public IList<TEntity> Select() => _myOracleContext.Set<TEntity>().ToList();
 
-        public TEntity Select(int id) => _mySqlContext.Set<TEntity>().Find(id);
+        public TEntity Select(int id) => _myOracleContext.Set<TEntity>().Find(id);
     }
 }

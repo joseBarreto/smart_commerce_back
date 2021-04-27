@@ -7,15 +7,15 @@ namespace SmartCommerce.Domain.Entities
     [Table("T_LOCAL")]
     public class Local : BaseEntity
     {
-        
+
         [Column("ID_LOCAL")]
         public new int Id { get; set; }
 
-        [Column("ID_SEGMENTO_ID_SEGMENTO")]
-        public int IdSegmento { get; set; }
+        [Column("T_SEGMENTO_ID_SEGMENTO")]
+        public int SegmentoId { get; set; }
 
         [Column("T_USUARIO_ID_USUARIO")]
-        public int IdUsuario { get; set; }
+        public int UsuarioId { get; set; }
 
         [Column("NOME")]
         public string Nome { get; set; }
@@ -29,8 +29,8 @@ namespace SmartCommerce.Domain.Entities
         [Column("LONGITUDE")]
         public double Longitude { get; set; }
 
-        [Column("LONGRADOURO")]
-        public string Longradouro { get; set; }
+        [Column("LOGRADOURO")]
+        public string Logradouro { get; set; }
 
         [Column("NUMERO")]
         public int Numero { get; set; }
@@ -42,6 +42,7 @@ namespace SmartCommerce.Domain.Entities
         public string Cidade { get; set; }
 
         [Column("UF")]
+        [StringLength(2, MinimumLength = 2, ErrorMessage = "O valor para {0} tem que ser igual á 2 caracteres")]
         public string Uf { get; set; }
 
         [Column("COMPLEMENTO")]
@@ -49,5 +50,9 @@ namespace SmartCommerce.Domain.Entities
 
         [Column("DATA_CADASTRO")]
         public DateTime DataCadastro { get; set; }
+
+        public Usuario Usuario { get; set; }
+
+        public Segmento Segmento { get; set; }
     }
 }

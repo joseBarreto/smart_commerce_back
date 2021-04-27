@@ -4,25 +4,26 @@ using SmartCommerce.Domain.Interfaces;
 using Swashbuckle.AspNetCore.Annotations;
 using System.Collections.Generic;
 
+
 namespace SmartCommerce.Application.Controllers
 {
     /// <summary>
-    /// Controle de usuários 
+    /// Controle de locais 
     /// </summary>
     [ApiController]
     [Route("[controller]")]
-    public class UsuarioController : BaseController
+    public class LocalController : BaseController
     {
         /// <summary>
         /// Serviço de Usuário
         /// </summary>
-        private readonly IBaseService<Usuario> _baseService;
+        private readonly ILocalService _baseService;
 
         /// <summary>
         /// Ctr
         /// </summary>
         /// <param name="baseUserService"></param>
-        public UsuarioController(IBaseService<Usuario> baseUserService)
+        public LocalController(ILocalService baseUserService)
         {
             _baseService = baseUserService;
         }
@@ -30,33 +31,33 @@ namespace SmartCommerce.Application.Controllers
         /// <summary>
         /// Insere um novo registro
         /// </summary>
-        /// <param name="user">Modelo para inserir</param>
+        /// <param name="local">Modelo para inserir</param>
         /// <returns>Id do obj</returns>
-        [SwaggerResponse(200, "Ok", typeof(Usuario))]
+        [SwaggerResponse(200, "Ok", typeof(Local))]
         [SwaggerResponse(400, "Bad Request", typeof(string))]
         [HttpPost]
-        public IActionResult Create([FromBody] Usuario user)
+        public IActionResult Create([FromBody] Local local)
         {
-            if (user == null)
+            if (local == null)
                 return NotFound();
-
-            return Execute(() => _baseService.Add(user).Id);
+            
+            return Execute(() => _baseService.Add(local).Id);
         }
 
         /// <summary>
         /// Atualiza um registro
         /// </summary>
-        /// <param name="user">Usuário com Id para atualização</param>
+        /// <param name="local">Usuário com Id para atualização</param>
         /// <returns>Modelo atualizado</returns>
-        [SwaggerResponse(200, "Ok", typeof(Usuario))]
+        [SwaggerResponse(200, "Ok", typeof(Local))]
         [SwaggerResponse(400, "Bad Request", typeof(string))]
         [HttpPut]
-        public IActionResult Update([FromBody] Usuario user)
+        public IActionResult Update([FromBody] Local local)
         {
-            if (user == null)
+            if (local == null)
                 return NotFound();
 
-            return Execute(() => _baseService.Update(user));
+            return Execute(() => _baseService.Update(local));
         }
 
         /// <summary>
@@ -83,7 +84,7 @@ namespace SmartCommerce.Application.Controllers
         /// Retorna uma lista de registros
         /// </summary>
         /// <returns></returns>
-        [SwaggerResponse(200, "Ok", typeof(IList<Usuario>))]
+        [SwaggerResponse(200, "Ok", typeof(IList<Local>))]
         [SwaggerResponse(400, "Bad Request", typeof(string))]
         [HttpGet]
         public IActionResult Get()
@@ -92,11 +93,23 @@ namespace SmartCommerce.Application.Controllers
         }
 
         /// <summary>
+        /// Retorna uma lista de registros contento Usuários e Segmentos
+        /// </summary>
+        /// <returns></returns>
+        [SwaggerResponse(200, "Ok", typeof(IList<Local>))]
+        [SwaggerResponse(400, "Bad Request", typeof(string))]
+        [HttpGet("GetWithIncludes")]
+        public IActionResult GetWithIncludes()
+        {
+            return Execute(() => _baseService.GetWithIncludes());
+        }
+
+        /// <summary>
         /// Procura um registro por Id
         /// </summary>
         /// <param name="id">Identificador único</param>
         /// <returns></returns>
-        [SwaggerResponse(200, "Ok", typeof(Usuario))]
+        [SwaggerResponse(200, "Ok", typeof(Local))]
         [SwaggerResponse(400, "Bad Request", typeof(string))]
         [HttpGet("{id}")]
         public IActionResult Get(int id)

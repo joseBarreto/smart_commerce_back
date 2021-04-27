@@ -18,7 +18,7 @@ using System;
 namespace SmartCommerce.Application
 {
 #pragma warning disable CS1591 // O comentário XML ausente não foi encontrado para o tipo ou membro visível publicamente
-    
+
     public class Startup
     {
         public Startup(IConfiguration configuration)
@@ -40,9 +40,9 @@ namespace SmartCommerce.Application
             services.AddScoped<IBaseRepository<Perfil>, BaseRepository<Perfil>>();
             services.AddScoped<IBaseRepository<Produto>, BaseRepository<Produto>>();
             services.AddScoped<IBaseRepository<Segmento>, BaseRepository<Segmento>>();
-            services.AddScoped<IBaseRepository<Segmento>, BaseRepository<Segmento>>();
             services.AddScoped<IBaseRepository<Usuario>, BaseRepository<Usuario>>();
             services.AddScoped<IBaseRepository<Votacao>, BaseRepository<Votacao>>();
+            services.AddScoped<ILocalRepository, LocalRepository>();
             #endregion
 
             #region service
@@ -50,9 +50,9 @@ namespace SmartCommerce.Application
             services.AddScoped<IBaseService<Perfil>, BaseService<Perfil>>();
             services.AddScoped<IBaseService<Produto>, BaseService<Produto>>();
             services.AddScoped<IBaseService<Segmento>, BaseService<Segmento>>();
-            services.AddScoped<IBaseService<Segmento>, BaseService<Segmento>>();
             services.AddScoped<IBaseService<Usuario>, BaseService<Usuario>>();
             services.AddScoped<IBaseService<Votacao>, BaseService<Votacao>>();
+            services.AddScoped<ILocalService, LocalService>();
             #endregion
 
             #region swagger
@@ -70,7 +70,7 @@ namespace SmartCommerce.Application
                 c.IncludeXmlComments(xmlPath);
             });
             #endregion
-            
+
             //services.AddSingleton(new MapperConfiguration(config =>
             //{
             //    config.CreateMap<CreateUserModel, User>();

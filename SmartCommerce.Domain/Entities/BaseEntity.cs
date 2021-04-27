@@ -9,7 +9,7 @@ namespace SmartCommerce.Domain.Entities
     public abstract class BaseEntity
     {
         /// <summary>
-        /// Identificador unico
+        /// Identificador único
         /// </summary>
         [Key]
         [Column("ID")]
