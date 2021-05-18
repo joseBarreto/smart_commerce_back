@@ -43,7 +43,7 @@ namespace SmartCommerce.Application
             services.AddScoped<IBaseRepository<Votacao>, BaseRepository<Votacao>>();
             services.AddScoped<ILocalRepository, LocalRepository>();
             #endregion
-
+            
             #region service
             services.AddScoped<IBaseService<Local>, BaseService<Local>>();
             services.AddScoped<IBaseService<Produto>, BaseService<Produto>>();

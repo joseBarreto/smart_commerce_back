@@ -14,7 +14,7 @@ namespace SmartCommerce.Domain.Entities
         public int LocalId { get; set; }
 
         [Column("VOTO")]
-        public char Voto { get; set; }
+        public bool Voto { get; set; }
 
         [Column("DATA_CADASTRO")]
         public DateTime DataCadastro { get; set; }
