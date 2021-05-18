@@ -16,6 +16,8 @@ namespace SmartCommerce.Infra.Data.Repository
         public IList<Local> GetWithIncludes() => _myOracleContext.Local
                                                                         .Include(l => l.Usuario)
                                                                         .Include(l => l.Segmento)
+                                                                        .Include(l => l.LocalProdutos)
+                                                                            .ThenInclude(l => l.Produto)
                                                                         .ToList();
     }
 }

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace SmartCommerce.Domain.Entities
@@ -6,9 +7,6 @@ namespace SmartCommerce.Domain.Entities
     [Table("T_PRODUTO")]
     public class Produto : BaseEntity
     {
-        [Column("ID_PRODUTO")]
-        public new int Id { get; set; }
-
         [Column("NOME")]
         public string Nome { get; set; }
 
@@ -23,5 +21,8 @@ namespace SmartCommerce.Domain.Entities
 
         [Column("CODIGO")]
         public int Codigo { get; set; }
+
+        public IList<LocalProduto> LocalProdutos { get; set; }
+
     }
 }

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -8,13 +9,10 @@ namespace SmartCommerce.Domain.Entities
     public class Local : BaseEntity
     {
 
-        [Column("ID_LOCAL")]
-        public new int Id { get; set; }
-
-        [Column("T_SEGMENTO_ID_SEGMENTO")]
+        [Column("SEGMENTOID")]
         public int SegmentoId { get; set; }
 
-        [Column("T_USUARIO_ID_USUARIO")]
+        [Column("USUARIOID")]
         public int UsuarioId { get; set; }
 
         [Column("NOME")]
@@ -54,5 +52,8 @@ namespace SmartCommerce.Domain.Entities
         public Usuario Usuario { get; set; }
 
         public Segmento Segmento { get; set; }
+
+        public IList<LocalProduto> LocalProdutos { get; set; }
+
     }
 }

@@ -14,6 +14,6 @@ namespace SmartCommerce.Domain.Entities
         [Key]
         [Column("ID")]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public virtual int Id { get; set; }
+        public int Id { get; set; }
     }
 }

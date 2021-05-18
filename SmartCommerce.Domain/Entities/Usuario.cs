@@ -7,8 +7,6 @@ namespace SmartCommerce.Domain.Entities
     [Table("T_USUARIO")]
     public class Usuario : BaseEntity
     {
-        [Column("ID_USUARIO")]
-        public new int Id { get; set; }
 
         [Column("NOME")]
         public string NomeCliente { get; set; }
@@ -20,7 +18,9 @@ namespace SmartCommerce.Domain.Entities
         public DateTime? DataCadastro { get; set; }
 
         [Column("STATUS")]
-        public char? Status { get; set; }
+        public bool Status { get; set; }
 
+        [Column("EMPRESA")]
+        public bool Empresa { get; set; }
     }
 }

@@ -6,8 +6,6 @@ namespace SmartCommerce.Domain.Entities
     [Table("T_SEGMENTO")]
     public class Segmento : BaseEntity
     {
-        [Column("ID_SEGMENTO")]
-        public new int Id { get; set; }
 
         [Column("CODIGO")]
         public int Codigo { get; set; }

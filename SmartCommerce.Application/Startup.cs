@@ -31,13 +31,12 @@ namespace SmartCommerce.Application
 
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddControllers();
+            services.AddControllers().AddNewtonsoftJson(options => options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);
 
             services.AddDbContext<SmartCommerceContext>(options => options.UseOracle(Configuration.GetConnectionString("SmartCommerceContext")));
 
             #region repository
             services.AddScoped<IBaseRepository<Local>, BaseRepository<Local>>();
-            services.AddScoped<IBaseRepository<Perfil>, BaseRepository<Perfil>>();
             services.AddScoped<IBaseRepository<Produto>, BaseRepository<Produto>>();
             services.AddScoped<IBaseRepository<Segmento>, BaseRepository<Segmento>>();
             services.AddScoped<IBaseRepository<Usuario>, BaseRepository<Usuario>>();
@@ -47,7 +46,6 @@ namespace SmartCommerce.Application
 
             #region service
             services.AddScoped<IBaseService<Local>, BaseService<Local>>();
-            services.AddScoped<IBaseService<Perfil>, BaseService<Perfil>>();
             services.AddScoped<IBaseService<Produto>, BaseService<Produto>>();
             services.AddScoped<IBaseService<Segmento>, BaseService<Segmento>>();
             services.AddScoped<IBaseService<Usuario>, BaseService<Usuario>>();
@@ -70,7 +68,7 @@ namespace SmartCommerce.Application
                 c.IncludeXmlComments(xmlPath);
             });
             #endregion
-            
+
         }
 
 
