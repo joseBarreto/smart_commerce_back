@@ -1,5 +1,5 @@
 # Smart Commerce Services
-Publicação: [smart_commerce_services](https://smart-commerce-back-br.azurewebsites.net)
+Publicação: [smart_commerce_services](https://smart-commerce-back.azurewebsites.net)
 
 
 # Status Pipeline
