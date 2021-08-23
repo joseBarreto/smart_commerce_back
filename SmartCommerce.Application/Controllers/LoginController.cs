@@ -41,7 +41,7 @@ namespace SmartCommerce.Application.Controllers
         {
             if (autenticacaoModel == null ||
                 string.IsNullOrEmpty(autenticacaoModel.Email) ||
-                string.IsNullOrEmpty(autenticacaoModel.Email))
+                string.IsNullOrEmpty(autenticacaoModel.Senha))
             {
                 return Unauthorized();
             }

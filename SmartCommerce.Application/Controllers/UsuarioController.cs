@@ -3,7 +3,8 @@ using Microsoft.AspNetCore.Mvc;
 using SmartCommerce.Domain.Entities;
 using SmartCommerce.Domain.Interfaces;
 using Swashbuckle.AspNetCore.Annotations;
-using System.Collections.Generic;
+using System.Linq;
+using System.Security.Claims;
 
 namespace SmartCommerce.Application.Controllers
 {
@@ -79,18 +80,6 @@ namespace SmartCommerce.Application.Controllers
         }
 
         /// <summary>
-        /// Retorna uma lista de registros
-        /// </summary>
-        /// <returns></returns>
-        [SwaggerResponse(200, "Ok", typeof(IList<Usuario>))]
-        [SwaggerResponse(400, "Bad Request", typeof(string))]
-        [HttpGet]
-        public IActionResult Get()
-        {
-            return Execute(() => _baseService.Get());
-        }
-
-        /// <summary>
         /// Procura um registro por Id
         /// </summary>
         /// <param name="id">Identificador único</param>
@@ -106,5 +95,22 @@ namespace SmartCommerce.Application.Controllers
             return Execute(() => _baseService.GetById(id));
         }
 
+
+        /// <summary>
+        /// Retorna os dados do usuário autenticado
+        /// </summary>
+        /// <returns></returns>
+        [SwaggerResponse(200, "Ok", typeof(Usuario))]
+        [SwaggerResponse(400, "Bad Request", typeof(string))]
+        [HttpGet()]
+        public IActionResult Get()
+        {
+            _ = int.TryParse(User.Claims.FirstOrDefault(x => x.Type == ClaimTypes.NameIdentifier)?.Value, out int userId);
+
+            if (userId <= 0)
+                return NotFound();
+
+            return Execute(() => _baseService.GetById(userId));
+        }
     }
 }

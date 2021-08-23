@@ -208,17 +208,17 @@
             <param name="id">Identificador</param>
             <returns></returns>
         </member>
-        <member name="M:SmartCommerce.Application.Controllers.UsuarioController.Get">
-            <summary>
-            Retorna uma lista de registros
-            </summary>
-            <returns></returns>
-        </member>
         <member name="M:SmartCommerce.Application.Controllers.UsuarioController.Get(System.Int32)">
             <summary>
             Procura um registro por Id
             </summary>
             <param name="id">Identificador único</param>
+            <returns></returns>
+        </member>
+        <member name="M:SmartCommerce.Application.Controllers.UsuarioController.Get">
+            <summary>
+            Retorna os dados do usuário autenticado
+            </summary>
             <returns></returns>
         </member>
     </members>
