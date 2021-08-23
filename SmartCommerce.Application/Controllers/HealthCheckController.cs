@@ -7,7 +7,7 @@ using System.Linq;
 namespace SmartCommerce.Application.Controllers
 {
     /// <summary>
-    /// 
+    ///  HealthCheck da aplicação
     /// </summary>
     [ApiController]
     [Route("[controller]")]
@@ -17,7 +17,7 @@ namespace SmartCommerce.Application.Controllers
         private readonly IBaseService<Usuario> _baseUserService;
 
         /// <summary>
-        /// 
+        /// Ctr
         /// </summary>
         /// <param name="baseUserService"></param>
         public HealthCheckController(IBaseService<Usuario> baseUserService)

@@ -1,8 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using SmartCommerce.Domain.Entities;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace SmartCommerce.Infra.Data.Context
 {
@@ -17,6 +14,7 @@ namespace SmartCommerce.Infra.Data.Context
         public DbSet<Produto> Produto { get; set; }
         public DbSet<Segmento> Segmento { get; set; }
         public DbSet<Usuario> Usuario { get; set; }
+        public DbSet<Login> Login { get; set; }
         public DbSet<Votacao> Votacao { get; set; }
 
         /// <summary>

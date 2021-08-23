@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using SmartCommerce.Domain.Entities;
 using SmartCommerce.Domain.Interfaces;
 using Swashbuckle.AspNetCore.Annotations;
@@ -9,6 +10,7 @@ namespace SmartCommerce.Application.Controllers
     /// <summary>
     /// Controle de segmentos
     /// </summary>
+    [Authorize(Roles = "User")]
     [ApiController]
     [Route("[controller]")]
     public class SegmentoController : BaseController

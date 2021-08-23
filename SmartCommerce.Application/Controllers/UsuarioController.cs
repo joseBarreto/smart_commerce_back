@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using SmartCommerce.Domain.Entities;
 using SmartCommerce.Domain.Interfaces;
 using Swashbuckle.AspNetCore.Annotations;
@@ -9,13 +10,11 @@ namespace SmartCommerce.Application.Controllers
     /// <summary>
     /// Controle de usuários 
     /// </summary>
+    [Authorize(Roles = "User")]
     [ApiController]
     [Route("[controller]")]
     public class UsuarioController : BaseController
     {
-        /// <summary>
-        /// Serviço de Usuário
-        /// </summary>
         private readonly IBaseService<Usuario> _baseService;
 
         /// <summary>

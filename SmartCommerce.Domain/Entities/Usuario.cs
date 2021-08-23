@@ -1,5 +1,4 @@
 ﻿using System;
-using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace SmartCommerce.Domain.Entities
@@ -7,7 +6,6 @@ namespace SmartCommerce.Domain.Entities
     [Table("T_USUARIO")]
     public class Usuario : BaseEntity
     {
-
         [Column("NOME")]
         public string NomeCliente { get; set; }
 

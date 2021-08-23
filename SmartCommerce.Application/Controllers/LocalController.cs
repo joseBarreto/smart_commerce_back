@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using SmartCommerce.Domain.Entities;
 using SmartCommerce.Domain.Interfaces;
 using Swashbuckle.AspNetCore.Annotations;
@@ -10,6 +11,7 @@ namespace SmartCommerce.Application.Controllers
     /// <summary>
     /// Controle de locais 
     /// </summary>
+    [Authorize(Roles = "User")]
     [ApiController]
     [Route("[controller]")]
     public class LocalController : BaseController
@@ -40,7 +42,7 @@ namespace SmartCommerce.Application.Controllers
         {
             if (local == null)
                 return NotFound();
-            
+
             return Execute(() => _baseService.Add(local).Id);
         }
 

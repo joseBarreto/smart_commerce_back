@@ -6,7 +6,7 @@
     <members>
         <member name="T:SmartCommerce.Application.Controllers.BaseController">
             <summary>
-            Clase base das controllers
+            Controle base
             </summary>
         </member>
         <member name="M:SmartCommerce.Application.Controllers.BaseController.Execute(System.Func{System.Object})">
@@ -18,12 +18,12 @@
         </member>
         <member name="T:SmartCommerce.Application.Controllers.HealthCheckController">
             <summary>
-            
+             HealthCheck da aplicação
             </summary>
         </member>
         <member name="M:SmartCommerce.Application.Controllers.HealthCheckController.#ctor(SmartCommerce.Domain.Interfaces.IBaseService{SmartCommerce.Domain.Entities.Usuario})">
             <summary>
-            
+            Ctr
             </summary>
             <param name="baseUserService"></param>
         </member>
@@ -35,12 +35,12 @@
         </member>
         <member name="T:SmartCommerce.Application.Controllers.HomeController">
             <summary>
-            
+             Home
             </summary>
         </member>
         <member name="M:SmartCommerce.Application.Controllers.HomeController.Index">
             <summary>
-            
+            Ctr
             </summary>
             <returns></returns>
         </member>
@@ -100,6 +100,37 @@
             <param name="id">Identificador único</param>
             <returns></returns>
         </member>
+        <member name="T:SmartCommerce.Application.Controllers.LoginController">
+            <summary>
+            Gerencia os dados de login, como geração de Token
+            </summary>
+        </member>
+        <member name="M:SmartCommerce.Application.Controllers.LoginController.#ctor(SmartCommerce.Domain.Interfaces.ILoginService)">
+            <summary>
+            Ctr
+            </summary>
+            <param name="loginService"></param>
+        </member>
+        <member name="M:SmartCommerce.Application.Controllers.LoginController.Login(SmartCommerce.Domain.Models.Autenticacao)">
+            <summary>
+            Gera um token 
+            </summary>
+            <param name="autenticacaoModel"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SmartCommerce.Application.Controllers.LoginController.Create(SmartCommerce.Domain.Entities.Login)">
+            <summary>
+            Insere um novo registro
+            </summary>
+            <param name="login">Modelo para inserir</param>
+            <returns>Id do obj</returns>
+        </member>
+        <member name="M:SmartCommerce.Application.Controllers.LoginController.ObterDadosPorToken">
+            <summary>
+            Retorna as Claims vinculadas no Token do Header
+            </summary>
+            <returns></returns>
+        </member>
         <member name="T:SmartCommerce.Application.Controllers.SegmentoController">
             <summary>
             Controle de segmentos
@@ -148,11 +179,6 @@
         <member name="T:SmartCommerce.Application.Controllers.UsuarioController">
             <summary>
             Controle de usuários 
-            </summary>
-        </member>
-        <member name="F:SmartCommerce.Application.Controllers.UsuarioController._baseService">
-            <summary>
-            Serviço de Usuário
             </summary>
         </member>
         <member name="M:SmartCommerce.Application.Controllers.UsuarioController.#ctor(SmartCommerce.Domain.Interfaces.IBaseService{SmartCommerce.Domain.Entities.Usuario})">

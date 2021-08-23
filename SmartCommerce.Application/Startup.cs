@@ -1,19 +1,23 @@
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
+using Microsoft.OpenApi.Models;
 using SmartCommerce.Domain.Entities;
-
 using SmartCommerce.Domain.Interfaces;
+using SmartCommerce.Domain.Settings;
 using SmartCommerce.Infra.Data.Context;
 using SmartCommerce.Infra.Data.Repository;
 using SmartCommerce.Service.Services;
-using Microsoft.OpenApi.Models;
-using System.Reflection;
-using System.IO;
 using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Reflection;
+using System.Text;
 
 namespace SmartCommerce.Application
 {
@@ -35,22 +39,49 @@ namespace SmartCommerce.Application
 
             services.AddDbContext<SmartCommerceContext>(options => options.UseOracle(Configuration.GetConnectionString("SmartCommerceContext")));
 
+
+            #region Settings
+            services.Configure<JwtSettings>(Configuration.GetSection(JwtSettings.Jwt));
+            #endregion
+
             #region repository
             services.AddScoped<IBaseRepository<Local>, BaseRepository<Local>>();
             services.AddScoped<IBaseRepository<Produto>, BaseRepository<Produto>>();
             services.AddScoped<IBaseRepository<Segmento>, BaseRepository<Segmento>>();
             services.AddScoped<IBaseRepository<Usuario>, BaseRepository<Usuario>>();
+            services.AddScoped<IBaseRepository<Login>, BaseRepository<Login>>();
             services.AddScoped<IBaseRepository<Votacao>, BaseRepository<Votacao>>();
             services.AddScoped<ILocalRepository, LocalRepository>();
+            services.AddScoped<ILoginRepository, LoginRepository>();
             #endregion
-            
+
             #region service
             services.AddScoped<IBaseService<Local>, BaseService<Local>>();
             services.AddScoped<IBaseService<Produto>, BaseService<Produto>>();
             services.AddScoped<IBaseService<Segmento>, BaseService<Segmento>>();
             services.AddScoped<IBaseService<Usuario>, BaseService<Usuario>>();
+            services.AddScoped<IBaseService<Login>, BaseService<Login>>();
             services.AddScoped<IBaseService<Votacao>, BaseService<Votacao>>();
             services.AddScoped<ILocalService, LocalService>();
+            services.AddScoped<ILoginService, LoginService>();
+            #endregion
+
+            #region Autenticação
+            services.AddAuthentication
+                (JwtBearerDefaults.AuthenticationScheme)
+                .AddJwtBearer(options =>
+                {
+                    options.TokenValidationParameters = new TokenValidationParameters
+                    {
+                        ValidateIssuer = true,
+                        ValidateAudience = true,
+                        ValidateLifetime = true,
+                        ValidateIssuerSigningKey = true,
+                        ValidIssuer = Configuration["Jwt:Issuer"],
+                        ValidAudience = Configuration["Jwt:Audience"],
+                        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration["Jwt:Key"]))
+                    };
+                });
             #endregion
 
             #region swagger
@@ -61,6 +92,35 @@ namespace SmartCommerce.Application
                     Version = "v1",
                     Title = "SmartCommerce Services",
                     Description = "API do SmartCommerce"
+                });
+
+                c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
+                {
+                    Description = $@"Cabeçalho de autorização JWT usando o esquema Bearer.
+                                    {Environment.NewLine}Digite 'Bearer' [espaço] e, em seguida, seu token.
+                                    {Environment.NewLine}Exemplo: 'Bearer 12345abcdef'",
+                    Name = "Authorization",
+                    In = ParameterLocation.Header,
+                    Type = SecuritySchemeType.ApiKey,
+                    Scheme = "Bearer"
+                });
+
+                c.AddSecurityRequirement(new OpenApiSecurityRequirement()
+                {
+                    {
+                        new OpenApiSecurityScheme
+                        {
+                            Reference = new OpenApiReference
+                            {
+                                Type = ReferenceType.SecurityScheme,
+                                Id = "Bearer"
+                            },
+                            Scheme = "oauth2",
+                            Name = "Bearer",
+                            In = ParameterLocation.Header
+                        },
+                        new List<string>()
+                    }
                 });
 
                 var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
@@ -90,6 +150,7 @@ namespace SmartCommerce.Application
 
             app.UseRouting();
 
+            app.UseAuthentication();
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>

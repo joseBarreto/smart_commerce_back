@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Text;
 
 namespace SmartCommerce.Domain.Entities
 {
@@ -21,6 +19,6 @@ namespace SmartCommerce.Domain.Entities
 
         [Column("DATA_CADASTRO")]
         public DateTime? DataCadastro { get; set; }
-      
+
     }
 }

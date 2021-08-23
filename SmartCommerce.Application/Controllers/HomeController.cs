@@ -3,7 +3,7 @@
 namespace SmartCommerce.Application.Controllers
 {
     /// <summary>
-    /// 
+    ///  Home
     /// </summary>
     [Route("")]
     [Route("Home")]
@@ -15,7 +15,7 @@ namespace SmartCommerce.Application.Controllers
     public class HomeController : Controller
     {
         /// <summary>
-        /// 
+        /// Ctr
         /// </summary>
         /// <returns></returns>
         [HttpGet]

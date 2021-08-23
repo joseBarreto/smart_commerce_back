@@ -5,7 +5,7 @@ using System.Net;
 namespace SmartCommerce.Application.Controllers
 {
     /// <summary>
-    /// Clase base das controllers
+    /// Controle base
     /// </summary>
     public class BaseController : ControllerBase
     {
