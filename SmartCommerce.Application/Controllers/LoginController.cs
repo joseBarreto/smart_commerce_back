@@ -1,10 +1,12 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using SmartCommerce.Domain.Entities;
 using SmartCommerce.Domain.Interfaces;
 using SmartCommerce.Domain.Models;
 using Swashbuckle.AspNetCore.Annotations;
 using System.Linq;
+using System.Security.Claims;
 using System.Text;
 
 namespace SmartCommerce.Application.Controllers
@@ -18,14 +20,16 @@ namespace SmartCommerce.Application.Controllers
     public class LoginController : BaseController
     {
         private readonly ILoginService _loginService;
+        private readonly IMapper _mapper;
 
         /// <summary>
         /// Ctr
         /// </summary>
         /// <param name="loginService"></param>
-        public LoginController(ILoginService loginService)
+        public LoginController(ILoginService loginService, IMapper mapper)
         {
             _loginService = loginService;
+            _mapper = mapper;
         }
 
         /// <summary>
@@ -53,7 +57,16 @@ namespace SmartCommerce.Application.Controllers
             }
 
             var tokenString = _loginService.GerarTokenJwt(login);
-            return Ok(new { token = tokenString });
+            return Ok(
+                new
+                {
+                    user = new
+                    {
+                        id = login.UsuarioId,
+                        email = login.Email
+                    },
+                    token = tokenString
+                });
         }
 
         /// <summary>
@@ -88,6 +101,38 @@ namespace SmartCommerce.Application.Controllers
                 }
 
                 return sb.ToString();
+            });
+        }
+
+
+        /// <summary>
+        /// Retorna os dados do usuário autenticado
+        /// </summary>
+        /// <returns></returns>
+        [SwaggerResponse(200, "Ok", typeof(Usuario))]
+        [SwaggerResponse(400, "Bad Request", typeof(string))]
+        [HttpGet()]
+        public IActionResult Get()
+        {
+            _ = int.TryParse(User.Claims.FirstOrDefault(x => x.Type == ClaimTypes.NameIdentifier)?.Value, out int userId);
+
+            if (userId <= 0)
+                return NotFound();
+
+            return Execute(() =>
+            {
+                //_mapper.Map<LoginModel>(_loginService.GetWithIncludesByUsuarioId(userId));
+                var login = _loginService.GetWithIncludesByUsuarioId(userId);
+                return new LoginModel()
+                {
+                    DataCadastro = login.Usuario.DataCadastro,
+                    DataUltimoAcesso = login.DataUltimoAcesso,
+                    Email = login.Email,
+                    Empresa = login.Usuario.Empresa,
+                    NomeCliente = login.Usuario.NomeCliente,
+                    Sobrenome = login.Usuario.Sobrenome,
+                    Status = login.Usuario.Status
+                };
             });
         }
     }

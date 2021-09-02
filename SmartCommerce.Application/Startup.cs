@@ -1,3 +1,4 @@
+using AutoMapper;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -9,6 +10,7 @@ using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using SmartCommerce.Domain.Entities;
 using SmartCommerce.Domain.Interfaces;
+using SmartCommerce.Domain.Models;
 using SmartCommerce.Domain.Settings;
 using SmartCommerce.Infra.Data.Context;
 using SmartCommerce.Infra.Data.Repository;
@@ -64,6 +66,21 @@ namespace SmartCommerce.Application
             services.AddScoped<IBaseService<Votacao>, BaseService<Votacao>>();
             services.AddScoped<ILocalService, LocalService>();
             services.AddScoped<ILoginService, LoginService>();
+            #endregion
+
+            #region autoMapper
+            //var configuration = new MapperConfiguration(cfg =>
+            //{
+            //    cfg.AddMaps(typeof(Program).Assembly);
+            //});
+            var configuration = new MapperConfiguration(config =>
+            {
+                config.CreateMap<LoginModel, Login>();
+            });
+
+            var mapper = configuration.CreateMapper();
+            services.AddSingleton(mapper);
+
             #endregion
 
             #region Autenticação

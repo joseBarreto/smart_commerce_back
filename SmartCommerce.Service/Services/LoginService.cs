@@ -27,6 +27,11 @@ namespace SmartCommerce.Service.Services
             return _localRepository.GetWithIncludesByEmailAndSenha(email, senha);
         }
 
+        public Login GetWithIncludesByUsuarioId(int usuarioId)
+        {
+            return _localRepository.GetWithIncludesByUsuarioId(usuarioId);
+        }
+
         public string GerarTokenJwt(Login login)
         {
 

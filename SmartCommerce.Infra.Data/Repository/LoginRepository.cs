@@ -17,5 +17,9 @@ namespace SmartCommerce.Infra.Data.Repository
         public Login GetWithIncludesByEmailAndSenha(string email, string senha) => _myOracleContext.Login
                                                                       .Include(l => l.Usuario)
                                                                       .FirstOrDefault(x => x.Email == email && x.Senha == senha);
+
+        public Login GetWithIncludesByUsuarioId(int usuarioId) => _myOracleContext.Login
+                                                                      .Include(l => l.Usuario)
+                                                                      .FirstOrDefault(x => x.UsuarioId == usuarioId);
     }
 }
