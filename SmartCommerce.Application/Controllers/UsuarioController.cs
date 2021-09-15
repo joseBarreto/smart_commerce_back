@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using SmartCommerce.Domain.Entities;
 using SmartCommerce.Domain.Interfaces;
+using SmartCommerce.Domain.Wrappers;
 using Swashbuckle.AspNetCore.Annotations;
 using System.Linq;
 using System.Security.Claims;
@@ -32,7 +33,7 @@ namespace SmartCommerce.Application.Controllers
         /// </summary>
         /// <param name="user">Modelo para inserir</param>
         /// <returns>Id do obj</returns>
-        [SwaggerResponse(200, "Ok", typeof(Usuario))]
+        [SwaggerResponse(200, "Ok", typeof(Response<int>))]
         [SwaggerResponse(400, "Bad Request", typeof(string))]
         [HttpPost]
         public IActionResult Create([FromBody] Usuario user)
@@ -40,7 +41,7 @@ namespace SmartCommerce.Application.Controllers
             if (user == null)
                 return NotFound();
 
-            return Execute(() => _baseService.Add(user).Id);
+            return Execute(() => Response<int>.Create(_baseService.Add(user).Id));
         }
 
         /// <summary>
@@ -48,7 +49,7 @@ namespace SmartCommerce.Application.Controllers
         /// </summary>
         /// <param name="user">Usuário com Id para atualização</param>
         /// <returns>Modelo atualizado</returns>
-        [SwaggerResponse(200, "Ok", typeof(Usuario))]
+        [SwaggerResponse(200, "Ok", typeof(Response<Usuario>))]
         [SwaggerResponse(400, "Bad Request", typeof(string))]
         [HttpPut]
         public IActionResult Update([FromBody] Usuario user)
@@ -56,7 +57,7 @@ namespace SmartCommerce.Application.Controllers
             if (user == null)
                 return NotFound();
 
-            return Execute(() => _baseService.Update(user));
+            return Execute(() => Response<Usuario>.Create(_baseService.Update(user)));
         }
 
         /// <summary>
@@ -79,28 +80,12 @@ namespace SmartCommerce.Application.Controllers
             });
         }
 
-        /// <summary>
-        /// Procura um registro por Id
-        /// </summary>
-        /// <param name="id">Identificador único</param>
-        /// <returns></returns>
-        [SwaggerResponse(200, "Ok", typeof(Usuario))]
-        [SwaggerResponse(400, "Bad Request", typeof(string))]
-        [HttpGet("{id}")]
-        public IActionResult Get(int id)
-        {
-            if (id == 0)
-                return NotFound();
-
-            return Execute(() => _baseService.GetById(id));
-        }
-
 
         /// <summary>
         /// Retorna os dados do usuário autenticado
         /// </summary>
         /// <returns></returns>
-        [SwaggerResponse(200, "Ok", typeof(Usuario))]
+        [SwaggerResponse(200, "Ok", typeof(Response<Usuario>))]
         [SwaggerResponse(400, "Bad Request", typeof(string))]
         [HttpGet()]
         public IActionResult Get()
@@ -110,7 +95,7 @@ namespace SmartCommerce.Application.Controllers
             if (userId <= 0)
                 return NotFound();
 
-            return Execute(() => _baseService.GetById(userId));
+            return Execute(() => Response<Usuario>.Create(_baseService.GetById(userId)));
         }
     }
 }

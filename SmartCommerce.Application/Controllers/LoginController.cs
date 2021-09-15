@@ -76,7 +76,7 @@ namespace SmartCommerce.Application.Controllers
         /// </summary>
         /// <param name="login">Modelo para inserir</param>
         /// <returns>Id do obj</returns>
-        [SwaggerResponse(200, "Ok", typeof(Login))]
+        [SwaggerResponse(200, "Ok", typeof(Response<int>))]
         [SwaggerResponse(400, "Bad Request", typeof(string))]
         [HttpPost("Create")]
         public IActionResult Create([FromBody] Login login)
@@ -84,13 +84,14 @@ namespace SmartCommerce.Application.Controllers
             if (login == null)
                 return NotFound();
 
-            return Execute(() => _loginService.Add(login).Id);
+            return Execute(() => Response<int>.Create(_loginService.Add(login).Id));
         }
 
         /// <summary>
         /// Retorna as Claims vinculadas no Token do Header
         /// </summary>
         /// <returns></returns>
+        [SwaggerResponse(200, "Ok", typeof(Response<string>))]
         [HttpGet("ObterDadosPorToken")]
         public IActionResult ObterDadosPorToken()
         {
@@ -102,7 +103,7 @@ namespace SmartCommerce.Application.Controllers
                     sb.AppendLine($"Tipo: {item.Type.Split('/').LastOrDefault()} / Valor: {item.Value}");
                 }
 
-                return sb.ToString();
+                return Response<string>.Create(sb.ToString());
             });
         }
 
@@ -111,7 +112,7 @@ namespace SmartCommerce.Application.Controllers
         /// Retorna os dados do usuário autenticado
         /// </summary>
         /// <returns></returns>
-        [SwaggerResponse(200, "Ok", typeof(Usuario))]
+        [SwaggerResponse(200, "Ok", typeof(Response<LoginModel>))]
         [SwaggerResponse(400, "Bad Request", typeof(string))]
         [HttpGet()]
         public IActionResult Get()

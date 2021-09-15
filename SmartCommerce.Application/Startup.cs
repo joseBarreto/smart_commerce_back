@@ -2,7 +2,6 @@ using AutoMapper;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -11,7 +10,6 @@ using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using SmartCommerce.Domain.Entities;
 using SmartCommerce.Domain.Interfaces;
-using SmartCommerce.Domain.Models;
 using SmartCommerce.Domain.Settings;
 using SmartCommerce.Infra.Data.Context;
 using SmartCommerce.Infra.Data.Mapping;
@@ -56,6 +54,7 @@ namespace SmartCommerce.Application
             services.AddScoped<IBaseRepository<Login>, BaseRepository<Login>>();
             services.AddScoped<IBaseRepository<Votacao>, BaseRepository<Votacao>>();
             services.AddScoped<ILocalRepository, LocalRepository>();
+            services.AddScoped<ISegmentoRepository, SegmentoRepository>();
             services.AddScoped<ILoginRepository, LoginRepository>();
             #endregion
 
@@ -67,6 +66,7 @@ namespace SmartCommerce.Application
             services.AddScoped<IBaseService<Login>, BaseService<Login>>();
             services.AddScoped<IBaseService<Votacao>, BaseService<Votacao>>();
             services.AddScoped<ILocalService, LocalService>();
+            services.AddScoped<ISegmentoService, SegmentoService>();
             services.AddScoped<ILoginService, LoginService>();
             
             #endregion

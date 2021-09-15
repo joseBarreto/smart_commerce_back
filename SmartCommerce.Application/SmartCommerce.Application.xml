@@ -86,6 +86,7 @@
             <summary>
             Retorna uma lista de registros
             </summary>
+            <param name="filter"></param>
             <returns></returns>
         </member>
         <member name="M:SmartCommerce.Application.Controllers.LocalController.Get(System.Int32)">
@@ -138,7 +139,7 @@
             Controle de segmentos
             </summary>
         </member>
-        <member name="M:SmartCommerce.Application.Controllers.SegmentoController.#ctor(SmartCommerce.Domain.Interfaces.IBaseService{SmartCommerce.Domain.Entities.Segmento})">
+        <member name="M:SmartCommerce.Application.Controllers.SegmentoController.#ctor(SmartCommerce.Domain.Interfaces.ISegmentoService)">
             <summary>
             Ctr
             </summary>
@@ -163,6 +164,13 @@
             Remove um registro 
             </summary>
             <param name="id">Identificador</param>
+            <returns></returns>
+        </member>
+        <member name="M:SmartCommerce.Application.Controllers.SegmentoController.Get(SmartCommerce.Domain.Filter.PaginationFilter)">
+            <summary>
+            Retorna uma lista de registros
+            </summary>
+            <param name="filter"></param>
             <returns></returns>
         </member>
         <member name="M:SmartCommerce.Application.Controllers.SegmentoController.Get(System.Int32)">
@@ -202,13 +210,6 @@
             Remove um registro 
             </summary>
             <param name="id">Identificador</param>
-            <returns></returns>
-        </member>
-        <member name="M:SmartCommerce.Application.Controllers.UsuarioController.Get(System.Int32)">
-            <summary>
-            Procura um registro por Id
-            </summary>
-            <param name="id">Identificador único</param>
             <returns></returns>
         </member>
         <member name="M:SmartCommerce.Application.Controllers.UsuarioController.Get">

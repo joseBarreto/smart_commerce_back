@@ -17,16 +17,16 @@ namespace SmartCommerce.Infra.Data.Repository
         {
             totalRecords = _myOracleContext.Set<Local>().Count();
 
-
-            return _myOracleContext.Local
-                                          .Skip((pageNumber - 1) * pageSize)
-                                          .Take(pageSize)
-                                          .Include(l => l.Usuario)
-                                          .Include(l => l.Segmento)
-                                          .Include(l => l.LocalProdutos)
-                                              .ThenInclude(l => l.Produto)
-                                          .OrderBy(x => x.Id)
-                                          .ToList();
+            var locais = _myOracleContext.Local
+                                    .Include(l => l.Usuario)
+                                    .Include(l => l.Segmento)
+                                    .Include(l => l.LocalProdutos)
+                                        .ThenInclude(l => l.Produto)
+                                    .OrderBy(x => x.Id)
+                                    .Skip((pageNumber - 1) * pageSize)
+                                    .Take(pageSize)
+                                    .ToList();
+            return locais;
         }
     }
 }

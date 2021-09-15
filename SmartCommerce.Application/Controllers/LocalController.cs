@@ -42,7 +42,7 @@ namespace SmartCommerce.Application.Controllers
         /// </summary>
         /// <param name="local">Modelo para inserir</param>
         /// <returns>Id do obj</returns>
-        [SwaggerResponse(200, "Ok", typeof(Local))]
+        [SwaggerResponse(200, "Ok", typeof(Response<int>))]
         [SwaggerResponse(400, "Bad Request", typeof(string))]
         [HttpPost]
         public IActionResult Create([FromBody] Local local)
@@ -50,7 +50,7 @@ namespace SmartCommerce.Application.Controllers
             if (local == null)
                 return NotFound();
 
-            return Execute(() => new Response<int>(_baseService.Add(local).Id));
+            return Execute(() => Response<int>.Create(_baseService.Add(local).Id));
         }
 
         /// <summary>
@@ -58,7 +58,7 @@ namespace SmartCommerce.Application.Controllers
         /// </summary>
         /// <param name="local">Usuário com Id para atualização</param>
         /// <returns>Modelo atualizado</returns>
-        [SwaggerResponse(200, "Ok", typeof(Local))]
+        [SwaggerResponse(200, "Ok", typeof(Response<Local>))]
         [SwaggerResponse(400, "Bad Request", typeof(string))]
         [HttpPut]
         public IActionResult Update([FromBody] Local local)
@@ -66,7 +66,7 @@ namespace SmartCommerce.Application.Controllers
             if (local == null)
                 return NotFound();
 
-            return Execute(() => new Response<Local>(_baseService.Update(local)));
+            return Execute(() => Response<Local>.Create(_baseService.Update(local)));
         }
 
         /// <summary>
@@ -92,6 +92,7 @@ namespace SmartCommerce.Application.Controllers
         /// <summary>
         /// Retorna uma lista de registros
         /// </summary>
+        /// <param name="filter"></param>
         /// <returns></returns>
         [SwaggerResponse(200, "Ok", typeof(PagedResponse<IList<LocalModel>>))]
         [SwaggerResponse(400, "Bad Request", typeof(Response<string>))]
@@ -121,8 +122,7 @@ namespace SmartCommerce.Application.Controllers
 
             return Execute(() =>
             {
-                var obj = _baseService.GetById(id);
-                return new Response<Local>(obj);
+                return Response<Local>.Create(_baseService.GetById(id));
             });
         }
 
