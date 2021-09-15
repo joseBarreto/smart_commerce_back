@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using SmartCommerce.Domain.Entities;
 using SmartCommerce.Domain.Interfaces;
 using SmartCommerce.Domain.Models;
+using SmartCommerce.Domain.Wrappers;
 using Swashbuckle.AspNetCore.Annotations;
 using System.Linq;
 using System.Security.Claims;
@@ -26,6 +27,7 @@ namespace SmartCommerce.Application.Controllers
         /// Ctr
         /// </summary>
         /// <param name="loginService"></param>
+        /// <param name="mapper"></param>
         public LoginController(ILoginService loginService, IMapper mapper)
         {
             _loginService = loginService;
@@ -121,18 +123,7 @@ namespace SmartCommerce.Application.Controllers
 
             return Execute(() =>
             {
-                //_mapper.Map<LoginModel>(_loginService.GetWithIncludesByUsuarioId(userId));
-                var login = _loginService.GetWithIncludesByUsuarioId(userId);
-                return new LoginModel()
-                {
-                    DataCadastro = login.Usuario.DataCadastro,
-                    DataUltimoAcesso = login.DataUltimoAcesso,
-                    Email = login.Email,
-                    Empresa = login.Usuario.Empresa,
-                    NomeCliente = login.Usuario.NomeCliente,
-                    Sobrenome = login.Usuario.Sobrenome,
-                    Status = login.Usuario.Status
-                };
+                return Response<LoginModel>.Create(_mapper.Map<LoginModel>(_loginService.GetWithIncludesByUsuarioId(userId)));
             });
         }
     }

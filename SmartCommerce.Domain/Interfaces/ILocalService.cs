@@ -5,6 +5,6 @@ namespace SmartCommerce.Domain.Interfaces
 {
     public interface ILocalService : IBaseService<Local>
     {
-        IList<Local> GetWithIncludes();
+        IList<Local> GetWithIncludes(int pageNumber, int pageSize, out int totalRecords);
     }
 }

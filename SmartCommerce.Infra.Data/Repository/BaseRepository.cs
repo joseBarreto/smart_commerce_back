@@ -34,8 +34,16 @@ namespace SmartCommerce.Infra.Data.Repository
             _myOracleContext.SaveChanges();
         }
 
-        public IList<TEntity> Select() => _myOracleContext.Set<TEntity>().ToList();
+        public IList<TEntity> Select(int pageNumber, int pageSize)
+        {
+            return _myOracleContext.Set<TEntity>()
+            .Skip((pageNumber - 1) * pageSize)
+            .Take(pageSize)
+            .ToList();
+        }
 
         public TEntity Select(int id) => _myOracleContext.Set<TEntity>().Find(id);
+
+        public int TotalRecords() => _myOracleContext.Set<TEntity>().Count();
     }
 }

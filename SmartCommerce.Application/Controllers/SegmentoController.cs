@@ -78,17 +78,6 @@ namespace SmartCommerce.Application.Controllers
             });
         }
 
-        /// <summary>
-        /// Retorna uma lista de registros
-        /// </summary>
-        /// <returns></returns>
-        [SwaggerResponse(200, "Ok", typeof(IList<Segmento>))]
-        [SwaggerResponse(400, "Bad Request", typeof(string))]
-        [HttpGet]
-        public IActionResult Get()
-        {
-            return Execute(() => _baseService.Get());
-        }
 
         /// <summary>
         /// Procura um registro por Id

@@ -32,7 +32,7 @@ namespace SmartCommerce.Domain.Interfaces
         /// Procura uma lista de registros
         /// </summary>
         /// <returns>Lista dos registros</returns>
-        IList<TEntity> Get();
+        IList<TEntity> Get(int pageNumber, int pageSize, out int totalRecords);
 
         /// <summary>
         /// Procura um registro

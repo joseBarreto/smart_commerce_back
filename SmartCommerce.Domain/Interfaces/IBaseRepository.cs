@@ -30,8 +30,10 @@ namespace SmartCommerce.Domain.Interfaces
         /// <summary>
         /// Procura uma lista de registros
         /// </summary>
+        /// <param name="pageNumber">Pagina atual</param>
+        /// <param name="pageSize">Total de itens por pagina</param>
         /// <returns>Lista dos registros</returns>
-        IList<TEntity> Select();
+        IList<TEntity> Select(int pageNumber, int pageSize);
 
         /// <summary>
         /// Procura um registro
@@ -39,5 +41,11 @@ namespace SmartCommerce.Domain.Interfaces
         /// <param name="id">Identificador do registro</param>
         /// <returns></returns>
         TEntity Select(int id);
+
+        /// <summary>
+        /// Total de itens
+        /// </summary>
+        /// <returns></returns>
+        int TotalRecords();
     }
 }

@@ -1,10 +1,13 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using SmartCommerce.Domain.Entities;
+using SmartCommerce.Domain.Filter;
 using SmartCommerce.Domain.Interfaces;
+using SmartCommerce.Domain.Models;
+using SmartCommerce.Domain.Wrappers;
 using Swashbuckle.AspNetCore.Annotations;
 using System.Collections.Generic;
-
 
 namespace SmartCommerce.Application.Controllers
 {
@@ -21,13 +24,17 @@ namespace SmartCommerce.Application.Controllers
         /// </summary>
         private readonly ILocalService _baseService;
 
+        private readonly IMapper _mapper;
+
         /// <summary>
         /// Ctr
         /// </summary>
         /// <param name="baseUserService"></param>
-        public LocalController(ILocalService baseUserService)
+        /// <param name="mapper"></param>
+        public LocalController(ILocalService baseUserService, IMapper mapper)
         {
             _baseService = baseUserService;
+            _mapper = mapper;
         }
 
         /// <summary>
@@ -43,7 +50,7 @@ namespace SmartCommerce.Application.Controllers
             if (local == null)
                 return NotFound();
 
-            return Execute(() => _baseService.Add(local).Id);
+            return Execute(() => new Response<int>(_baseService.Add(local).Id));
         }
 
         /// <summary>
@@ -59,7 +66,7 @@ namespace SmartCommerce.Application.Controllers
             if (local == null)
                 return NotFound();
 
-            return Execute(() => _baseService.Update(local));
+            return Execute(() => new Response<Local>(_baseService.Update(local)));
         }
 
         /// <summary>
@@ -86,24 +93,17 @@ namespace SmartCommerce.Application.Controllers
         /// Retorna uma lista de registros
         /// </summary>
         /// <returns></returns>
-        [SwaggerResponse(200, "Ok", typeof(IList<Local>))]
-        [SwaggerResponse(400, "Bad Request", typeof(string))]
+        [SwaggerResponse(200, "Ok", typeof(PagedResponse<IList<LocalModel>>))]
+        [SwaggerResponse(400, "Bad Request", typeof(Response<string>))]
         [HttpGet]
-        public IActionResult Get()
+        public IActionResult Get([FromQuery] PaginationFilter filter)
         {
-            return Execute(() => _baseService.Get());
-        }
-
-        /// <summary>
-        /// Retorna uma lista de registros contento Usuários e Segmentos
-        /// </summary>
-        /// <returns></returns>
-        [SwaggerResponse(200, "Ok", typeof(IList<Local>))]
-        [SwaggerResponse(400, "Bad Request", typeof(string))]
-        [HttpGet("GetWithIncludes")]
-        public IActionResult GetWithIncludes()
-        {
-            return Execute(() => _baseService.GetWithIncludes());
+            return Execute(() =>
+            {
+                var local = _baseService.GetWithIncludes(filter.PageNumber, filter.PageSize, out int totalRecords);
+                var localModel = _mapper.Map<IList<Local>, IList<LocalModel>>(local);
+                return CreatePagedReponse(localModel, filter, totalRecords);
+            });
         }
 
         /// <summary>
@@ -111,7 +111,7 @@ namespace SmartCommerce.Application.Controllers
         /// </summary>
         /// <param name="id">Identificador único</param>
         /// <returns></returns>
-        [SwaggerResponse(200, "Ok", typeof(Local))]
+        [SwaggerResponse(200, "Ok", typeof(Response<Local>))]
         [SwaggerResponse(400, "Bad Request", typeof(string))]
         [HttpGet("{id}")]
         public IActionResult Get(int id)
@@ -119,7 +119,11 @@ namespace SmartCommerce.Application.Controllers
             if (id == 0)
                 return NotFound();
 
-            return Execute(() => _baseService.GetById(id));
+            return Execute(() =>
+            {
+                var obj = _baseService.GetById(id);
+                return new Response<Local>(obj);
+            });
         }
 
     }

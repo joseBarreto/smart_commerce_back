@@ -21,6 +21,7 @@ namespace SmartCommerce.Infra.Data.Mapping
 
             var mapperConfiguration = new MapperConfiguration(config => {
                 config.CreateMap<LoginModel,Login>();
+                config.CreateMap<Login, LoginModel>();
             });
 
             var mapper = mapperConfiguration.CreateMapper();

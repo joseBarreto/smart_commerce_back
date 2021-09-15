@@ -54,11 +54,12 @@
             Serviço de Usuário
             </summary>
         </member>
-        <member name="M:SmartCommerce.Application.Controllers.LocalController.#ctor(SmartCommerce.Domain.Interfaces.ILocalService)">
+        <member name="M:SmartCommerce.Application.Controllers.LocalController.#ctor(SmartCommerce.Domain.Interfaces.ILocalService,AutoMapper.IMapper)">
             <summary>
             Ctr
             </summary>
             <param name="baseUserService"></param>
+            <param name="mapper"></param>
         </member>
         <member name="M:SmartCommerce.Application.Controllers.LocalController.Create(SmartCommerce.Domain.Entities.Local)">
             <summary>
@@ -81,15 +82,9 @@
             <param name="id">Identificador</param>
             <returns></returns>
         </member>
-        <member name="M:SmartCommerce.Application.Controllers.LocalController.Get">
+        <member name="M:SmartCommerce.Application.Controllers.LocalController.Get(SmartCommerce.Domain.Filter.PaginationFilter)">
             <summary>
             Retorna uma lista de registros
-            </summary>
-            <returns></returns>
-        </member>
-        <member name="M:SmartCommerce.Application.Controllers.LocalController.GetWithIncludes">
-            <summary>
-            Retorna uma lista de registros contento Usuários e Segmentos
             </summary>
             <returns></returns>
         </member>
@@ -110,6 +105,7 @@
             Ctr
             </summary>
             <param name="loginService"></param>
+            <param name="mapper"></param>
         </member>
         <member name="M:SmartCommerce.Application.Controllers.LoginController.Login(SmartCommerce.Domain.Models.Autenticacao)">
             <summary>
@@ -167,12 +163,6 @@
             Remove um registro 
             </summary>
             <param name="id">Identificador</param>
-            <returns></returns>
-        </member>
-        <member name="M:SmartCommerce.Application.Controllers.SegmentoController.Get">
-            <summary>
-            Retorna uma lista de registros
-            </summary>
             <returns></returns>
         </member>
         <member name="M:SmartCommerce.Application.Controllers.SegmentoController.Get(System.Int32)">

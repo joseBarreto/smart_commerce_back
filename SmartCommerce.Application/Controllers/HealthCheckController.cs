@@ -34,7 +34,7 @@ namespace SmartCommerce.Application.Controllers
         {
             try
             {
-                return Execute(() => _baseUserService.Get().Any());
+                return Execute(() => _baseUserService.Get(1, 1, out int totalItens).Any());
             }
             catch (System.Exception ex)
             {

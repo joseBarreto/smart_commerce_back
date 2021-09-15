@@ -24,9 +24,10 @@ namespace SmartCommerce.Service.Services
             _baseRepository.Delete(id);
         }
 
-        public IList<TEntity> Get()
+        public IList<TEntity> Get(int pageNumber, int pageSize, out int totalRecords)
         {
-            return _baseRepository.Select();
+            totalRecords = _baseRepository.TotalRecords();
+            return _baseRepository.Select(pageNumber, pageSize);
         }
 
         public TEntity GetById(int id)
