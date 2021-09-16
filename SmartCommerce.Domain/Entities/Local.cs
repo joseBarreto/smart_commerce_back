@@ -49,6 +49,9 @@ namespace SmartCommerce.Domain.Entities
         [Column("DATA_CADASTRO")]
         public DateTime DataCadastro { get; set; }
 
+        [Column("TOTAL_VOTACAO")]
+        public int? TotalVotacao { get; set; }
+
         public Usuario Usuario { get; set; }
 
         public Segmento Segmento { get; set; }
