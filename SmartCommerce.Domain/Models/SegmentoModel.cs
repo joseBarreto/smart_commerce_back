@@ -11,6 +11,7 @@ namespace SmartCommerce.Domain.Models
         public int Codigo { get; set; }
         public string Nome { get; set; }
         public string Descricao { get; set; }
+        public string IconeNome { get; set; }
 
     }
 }

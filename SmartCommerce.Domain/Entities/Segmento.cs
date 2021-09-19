@@ -18,5 +18,9 @@ namespace SmartCommerce.Domain.Entities
 
         [Column("DATA_CADASTRO")]
         public DateTime DataCadastro { get; set; }
+
+        [Column("ICONE_NOME")]
+        public string IconeNome { get; set; }
+
     }
 }
