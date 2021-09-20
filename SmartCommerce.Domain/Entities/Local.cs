@@ -52,6 +52,9 @@ namespace SmartCommerce.Domain.Entities
         [Column("TOTAL_VOTACAO")]
         public int? TotalVotacao { get; set; }
 
+        [Column("IMAGEURL")]
+        public string ImageURL { get; set; }
+
         public Usuario Usuario { get; set; }
 
         public Segmento Segmento { get; set; }

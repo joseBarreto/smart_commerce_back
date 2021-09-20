@@ -6,7 +6,7 @@ namespace SmartCommerce.Domain.Models
     public class LocalModel
     {
         public string Nome { get; set; }
-        public Uri ImageURL { get; set; } = new Uri("https://super.abril.com.br/wp-content/uploads/2016/10/super_imgfilhote_de_pug_0.jpg");
+        public string ImageURL { get; set; }
         public DateTime DataCadastro { get; set; }
         public int TotalVotacao { get; set; }
 

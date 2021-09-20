@@ -22,7 +22,7 @@ namespace SmartCommerce.Infra.Data.Repository
                                     .Include(l => l.Segmento)
                                     .Include(l => l.LocalProdutos)
                                         .ThenInclude(l => l.Produto)
-                                    .OrderBy(x => x.Id)
+                                    .OrderByDescending(x => x.DataCadastro)
                                     .Skip((pageNumber - 1) * pageSize)
                                     .Take(pageSize)
                                     .ToList();
