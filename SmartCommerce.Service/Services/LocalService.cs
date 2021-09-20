@@ -15,7 +15,7 @@ namespace SmartCommerce.Service.Services
 
         public IList<Local> GetWithIncludes(int pageNumber, int pageSize, out int totalRecords)
         {
-            return _localRepository.GetWithIncludes(pageNumber, pageSize,out totalRecords);
+            return _localRepository.GetWithIncludes(pageNumber, pageSize, out totalRecords);
         }
     }
 }

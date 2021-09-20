@@ -69,7 +69,7 @@ namespace SmartCommerce.Application.Controllers
             var baseUri = string.Concat(Request.Scheme, "://", Request.Host.ToUriComponent());
             var enpointUri = new Uri(string.Concat(baseUri, route));
             var modifiedUri = QueryHelpers.AddQueryString(enpointUri.ToString(), "pageNumber", filter.PageNumber.ToString());
-            
+
             modifiedUri = QueryHelpers.AddQueryString(modifiedUri, "pageSize", filter.PageSize.ToString());
             return new Uri(modifiedUri);
         }

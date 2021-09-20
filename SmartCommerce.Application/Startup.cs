@@ -68,7 +68,7 @@ namespace SmartCommerce.Application
             services.AddScoped<ILocalService, LocalService>();
             services.AddScoped<ISegmentoService, SegmentoService>();
             services.AddScoped<ILoginService, LoginService>();
-            
+
             #endregion
 
             #region autoMapper

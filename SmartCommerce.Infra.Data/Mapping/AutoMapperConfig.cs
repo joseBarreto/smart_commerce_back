@@ -1,11 +1,6 @@
 ﻿using AutoMapper;
 using SmartCommerce.Domain.Entities;
 using SmartCommerce.Domain.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 
 namespace SmartCommerce.Infra.Data.Mapping
@@ -19,8 +14,9 @@ namespace SmartCommerce.Infra.Data.Mapping
             //    cfg.AddMaps(typeof(Program).Assembly);
             //});
 
-            var mapperConfiguration = new MapperConfiguration(config => {
-                config.CreateMap<LoginModel,Login>();
+            var mapperConfiguration = new MapperConfiguration(config =>
+            {
+                config.CreateMap<LoginModel, Login>();
                 config.CreateMap<Login, LoginModel>();
             });
 
