@@ -11,14 +11,12 @@ namespace SmartCommerce.Domain.Entities
 
         public Local Local { get; set; }
 
-
         [Column("PRODUTOID")]
         public int ProdutoId { get; set; }
-        public Produto Produto { get; set; }
 
+        public Produto Produto { get; set; }
 
         [Column("DATA_CADASTRO")]
         public DateTime? DataCadastro { get; set; }
-
     }
 }

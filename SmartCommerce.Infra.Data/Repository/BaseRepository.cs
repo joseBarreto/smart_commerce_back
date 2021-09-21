@@ -15,7 +15,6 @@ namespace SmartCommerce.Infra.Data.Repository
             _myOracleContext = mySqlContext;
         }
 
-
         public void Insert(TEntity obj)
         {
             _myOracleContext.Set<TEntity>().Add(obj);

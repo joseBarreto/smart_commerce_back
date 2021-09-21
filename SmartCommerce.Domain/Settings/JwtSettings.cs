@@ -12,6 +12,5 @@ namespace SmartCommerce.Domain.Settings
         public string Issuer { get; set; }
         public string Audience { get; set; }
         public DateTime NewDateExpiry => DateTime.Now.AddDays(1);
-
     }
 }

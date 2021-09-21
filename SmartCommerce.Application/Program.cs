@@ -4,7 +4,8 @@ using Microsoft.Extensions.Hosting;
 namespace SmartCommerce.Application
 {
 #pragma warning disable CS1591 // O comentário XML ausente não foi encontrado para o tipo ou membro visível publicamente
-    public class Program
+
+    public static class Program
     {
         public static void Main(string[] args)
         {
@@ -18,6 +19,6 @@ namespace SmartCommerce.Application
                     webBuilder.UseStartup<Startup>();
                 });
     }
-#pragma warning restore CS1591 // O comentário XML ausente não foi encontrado para o tipo ou membro visível publicamente
 
+#pragma warning restore CS1591 // O comentário XML ausente não foi encontrado para o tipo ou membro visível publicamente
 }

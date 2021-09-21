@@ -6,7 +6,6 @@ namespace SmartCommerce.Domain.Entities
     [Table("T_VOTACAO")]
     public class Votacao : BaseEntity
     {
-
         [Column("USUARIOID")]
         public int UsuarioId { get; set; }
 

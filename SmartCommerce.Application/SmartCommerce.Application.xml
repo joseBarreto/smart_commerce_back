@@ -11,7 +11,7 @@
         </member>
         <member name="M:SmartCommerce.Application.Controllers.BaseController.Execute(System.Func{System.Object})">
             <summary>
-            Executa uma function 
+            Executa uma function
             </summary>
             <param name="func">função para execução</param>
             <returns>Ok para sucesso e BadRequest para erros</returns>
@@ -28,10 +28,10 @@
             <param name="baseUserService"></param>
         </member>
         <member name="M:SmartCommerce.Application.Controllers.HealthCheckController.Index">
-            <summary>
+             <summary>
             
-            </summary>
-            <returns></returns>
+             </summary>
+             <returns></returns>
         </member>
         <member name="T:SmartCommerce.Application.Controllers.HomeController">
             <summary>
@@ -46,7 +46,7 @@
         </member>
         <member name="T:SmartCommerce.Application.Controllers.LocalController">
             <summary>
-            Controle de locais 
+            Controle de locais
             </summary>
         </member>
         <member name="F:SmartCommerce.Application.Controllers.LocalController._baseService">
@@ -77,7 +77,7 @@
         </member>
         <member name="M:SmartCommerce.Application.Controllers.LocalController.Delete(System.Int32)">
             <summary>
-            Remove um registro 
+            Remove um registro
             </summary>
             <param name="id">Identificador</param>
             <returns></returns>
@@ -110,7 +110,7 @@
         </member>
         <member name="M:SmartCommerce.Application.Controllers.LoginController.Login(SmartCommerce.Domain.Models.Autenticacao)">
             <summary>
-            Gera um token 
+            Gera um token
             </summary>
             <param name="autenticacaoModel"></param>
             <returns></returns>
@@ -161,7 +161,7 @@
         </member>
         <member name="M:SmartCommerce.Application.Controllers.SegmentoController.Delete(System.Int32)">
             <summary>
-            Remove um registro 
+            Remove um registro
             </summary>
             <param name="id">Identificador</param>
             <returns></returns>
@@ -182,7 +182,7 @@
         </member>
         <member name="T:SmartCommerce.Application.Controllers.UsuarioController">
             <summary>
-            Controle de usuários 
+            Controle de usuários
             </summary>
         </member>
         <member name="M:SmartCommerce.Application.Controllers.UsuarioController.#ctor(SmartCommerce.Domain.Interfaces.IBaseService{SmartCommerce.Domain.Entities.Usuario})">
@@ -207,7 +207,7 @@
         </member>
         <member name="M:SmartCommerce.Application.Controllers.UsuarioController.Delete(System.Int32)">
             <summary>
-            Remove um registro 
+            Remove um registro
             </summary>
             <param name="id">Identificador</param>
             <returns></returns>

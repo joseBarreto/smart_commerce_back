@@ -34,20 +34,21 @@ namespace SmartCommerce.Application
 
         public IConfiguration Configuration { get; }
 
-
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers().AddNewtonsoftJson(options => options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);
 
-            //services.AddDbContext<SmartCommerceContext>(options => options.UseOracle(Configuration.GetConnectionString("SmartCommerceContext")));
+            // services.AddDbContext<SmartCommerceContext>(options => options.UseOracle(Configuration.GetConnectionString("SmartCommerceContext")))
             services.AddDbContext<SmartCommerceContext>(options => options.UseSqlServer(Configuration.GetConnectionString("SmartCommerceContext")));
 
-
             #region Settings
+
             services.Configure<JwtSettings>(Configuration.GetSection(JwtSettings.Jwt));
-            #endregion
+
+            #endregion Settings
 
             #region repository
+
             services.AddScoped<IBaseRepository<Local>, BaseRepository<Local>>();
             services.AddScoped<IBaseRepository<Produto>, BaseRepository<Produto>>();
             services.AddScoped<IBaseRepository<Segmento>, BaseRepository<Segmento>>();
@@ -57,9 +58,11 @@ namespace SmartCommerce.Application
             services.AddScoped<ILocalRepository, LocalRepository>();
             services.AddScoped<ISegmentoRepository, SegmentoRepository>();
             services.AddScoped<ILoginRepository, LoginRepository>();
-            #endregion
+
+            #endregion repository
 
             #region service
+
             services.AddScoped<IBaseService<Local>, BaseService<Local>>();
             services.AddScoped<IBaseService<Produto>, BaseService<Produto>>();
             services.AddScoped<IBaseService<Segmento>, BaseService<Segmento>>();
@@ -70,9 +73,10 @@ namespace SmartCommerce.Application
             services.AddScoped<ISegmentoService, SegmentoService>();
             services.AddScoped<ILoginService, LoginService>();
 
-            #endregion
+            #endregion service
 
             #region autoMapper
+
             var configuration = new MapperConfiguration(cfg =>
             {
                 cfg.AddProfile<MappingProfile>();
@@ -81,9 +85,10 @@ namespace SmartCommerce.Application
             var mapper = configuration.CreateMapper();
             services.AddSingleton(mapper);
 
-            #endregion
+            #endregion autoMapper
 
             #region Autenticação
+
             services.AddAuthentication
                 (JwtBearerDefaults.AuthenticationScheme)
                 .AddJwtBearer(options =>
@@ -99,9 +104,11 @@ namespace SmartCommerce.Application
                         IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration["Jwt:Key"]))
                     };
                 });
-            #endregion
+
+            #endregion Autenticação
 
             #region swagger
+
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo
@@ -144,10 +151,9 @@ namespace SmartCommerce.Application
                 var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
                 c.IncludeXmlComments(xmlPath);
             });
-            #endregion
 
+            #endregion swagger
         }
-
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {

@@ -8,7 +8,6 @@ namespace SmartCommerce.Domain.Entities
     [Table("T_LOCAL")]
     public class Local : BaseEntity
     {
-
         [Column("SEGMENTOID")]
         public int SegmentoId { get; set; }
 
@@ -64,6 +63,5 @@ namespace SmartCommerce.Domain.Entities
         public Segmento Segmento { get; set; }
 
         public IList<LocalProduto> LocalProdutos { get; set; }
-
     }
 }

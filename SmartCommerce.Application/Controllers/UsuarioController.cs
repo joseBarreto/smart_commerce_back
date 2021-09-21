@@ -10,7 +10,7 @@ using System.Security.Claims;
 namespace SmartCommerce.Application.Controllers
 {
     /// <summary>
-    /// Controle de usuários 
+    /// Controle de usuários
     /// </summary>
     [Authorize(Roles = "User")]
     [ApiController]
@@ -61,7 +61,7 @@ namespace SmartCommerce.Application.Controllers
         }
 
         /// <summary>
-        /// Remove um registro 
+        /// Remove um registro
         /// </summary>
         /// <param name="id">Identificador</param>
         /// <returns></returns>
@@ -79,7 +79,6 @@ namespace SmartCommerce.Application.Controllers
                 return new NoContentResult();
             });
         }
-
 
         /// <summary>
         /// Retorna os dados do usuário autenticado

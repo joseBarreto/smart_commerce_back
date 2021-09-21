@@ -8,7 +8,6 @@ namespace SmartCommerce.Infra.Data.Context
     /// </summary>
     public class SmartCommerceContext : DbContext
     {
-
         public DbSet<Local> Local { get; set; }
         public DbSet<LocalProduto> LocalProdutos { get; set; }
         public DbSet<Produto> Produto { get; set; }
@@ -45,13 +44,10 @@ namespace SmartCommerce.Infra.Data.Context
                 .WithMany(s => s.LocalProdutos)
                 .HasForeignKey(sc => sc.LocalId);
 
-
             modelBuilder.Entity<LocalProduto>()
                 .HasOne<Produto>(sc => sc.Produto)
                 .WithMany(s => s.LocalProdutos)
                 .HasForeignKey(sc => sc.ProdutoId);
-
-
         }
     }
 }

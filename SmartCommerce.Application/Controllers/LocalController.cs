@@ -12,7 +12,7 @@ using System.Collections.Generic;
 namespace SmartCommerce.Application.Controllers
 {
     /// <summary>
-    /// Controle de locais 
+    /// Controle de locais
     /// </summary>
     [Authorize(Roles = "User")]
     [ApiController]
@@ -70,7 +70,7 @@ namespace SmartCommerce.Application.Controllers
         }
 
         /// <summary>
-        /// Remove um registro 
+        /// Remove um registro
         /// </summary>
         /// <param name="id">Identificador</param>
         /// <returns></returns>
@@ -125,6 +125,5 @@ namespace SmartCommerce.Application.Controllers
                 return Response<Local>.Create(_baseService.GetById(id));
             });
         }
-
     }
 }

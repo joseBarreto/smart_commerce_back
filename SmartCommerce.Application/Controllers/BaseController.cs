@@ -14,7 +14,7 @@ namespace SmartCommerce.Application.Controllers
     public class BaseController : ControllerBase
     {
         /// <summary>
-        /// Executa uma function 
+        /// Executa uma function
         /// </summary>
         /// <param name="func">função para execução</param>
         /// <returns>Ok para sucesso e BadRequest para erros</returns>

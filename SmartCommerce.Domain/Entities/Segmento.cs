@@ -6,7 +6,6 @@ namespace SmartCommerce.Domain.Entities
     [Table("T_SEGMENTO")]
     public class Segmento : BaseEntity
     {
-
         [Column("CODIGO")]
         public int Codigo { get; set; }
 
@@ -21,6 +20,5 @@ namespace SmartCommerce.Domain.Entities
 
         [Column("ICONE_NOME")]
         public string IconeNome { get; set; }
-
     }
 }

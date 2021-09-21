@@ -25,7 +25,6 @@ namespace SmartCommerce.Infra.Data.Mapping
             CreateMap<Produto, ProdutoModel>();
             CreateMap<Segmento, SegmentoModel>();
             CreateMap<Local, EnderecoModel>();
-
         }
     }
 }

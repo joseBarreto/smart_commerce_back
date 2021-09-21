@@ -19,7 +19,6 @@ namespace SmartCommerce.Service.Services
         {
             _localRepository = localRepository;
             _jwtSettings = jwtSettings.Value;
-
         }
 
         public Login GetWithIncludesByEmailAndSenha(string email, string senha)
@@ -34,7 +33,6 @@ namespace SmartCommerce.Service.Services
 
         public string GerarTokenJwt(Login login)
         {
-
             var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_jwtSettings.Key));
             var credentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256);
             var claims = new List<Claim>
@@ -56,6 +54,5 @@ namespace SmartCommerce.Service.Services
 
             return stringToken;
         }
-
     }
 }

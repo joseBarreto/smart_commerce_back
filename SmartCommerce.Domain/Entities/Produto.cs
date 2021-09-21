@@ -23,6 +23,5 @@ namespace SmartCommerce.Domain.Entities
         public int Codigo { get; set; }
 
         public IList<LocalProduto> LocalProdutos { get; set; }
-
     }
 }

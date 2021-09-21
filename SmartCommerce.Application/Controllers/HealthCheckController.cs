@@ -26,7 +26,7 @@ namespace SmartCommerce.Application.Controllers
         }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <returns></returns>
         [HttpGet]
@@ -39,7 +39,6 @@ namespace SmartCommerce.Application.Controllers
             catch (System.Exception ex)
             {
                 return StatusCode(StatusCodes.Status500InternalServerError, ex.ToString());
-
             }
         }
     }

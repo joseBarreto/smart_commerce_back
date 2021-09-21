@@ -2,7 +2,6 @@
 using SmartCommerce.Domain.Entities;
 using SmartCommerce.Domain.Models;
 
-
 namespace SmartCommerce.Infra.Data.Mapping
 {
     public static class AutoMapperConfig

@@ -4,7 +4,7 @@ using System.Collections.Generic;
 namespace SmartCommerce.Domain.Interfaces
 {
     /// <summary>
-    /// Base para os services 
+    /// Base para os services
     /// </summary>
     /// <typeparam name="TEntity">Entidade herdada de BaseEntity</typeparam>
     public interface IBaseService<TEntity> where TEntity : BaseEntity

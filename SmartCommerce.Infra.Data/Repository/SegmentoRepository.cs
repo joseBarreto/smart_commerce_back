@@ -10,7 +10,6 @@ namespace SmartCommerce.Infra.Data.Repository
     {
         public SegmentoRepository(SmartCommerceContext mySqlContext) : base(mySqlContext)
         {
-
         }
 
         public IList<Segmento> GetWithIncludes(int pageNumber, int pageSize, out int totalRecords)

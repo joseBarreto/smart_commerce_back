@@ -61,7 +61,7 @@ namespace SmartCommerce.Application.Controllers
         }
 
         /// <summary>
-        /// Remove um registro 
+        /// Remove um registro
         /// </summary>
         /// <param name="id">Identificador</param>
         /// <returns></returns>
