@@ -6,7 +6,8 @@ namespace SmartCommerce.Domain.Models
     public class LocalModel
     {
         public string Nome { get; set; }
-        public string ImagemURL { get; set; }
+        public string Descricao { get; set; }
+        public string ImageURL { get; set; }
         public DateTime DataCadastro { get; set; }
         public int TotalVotacao { get; set; }
 

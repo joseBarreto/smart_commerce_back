@@ -19,7 +19,8 @@ namespace SmartCommerce.Infra.Data.Mapping
 
             CreateMap<Local, LocalModel>()
                 .ForMember(dest => dest.Produtos, map => map.MapFrom(src => src.LocalProdutos.Select(x => x.Produto)))
-                .ForMember(dest => dest.Endereco, map => map.MapFrom(src => src));
+                .ForMember(dest => dest.Endereco, map => map.MapFrom(src => src))
+                .ForMember(dest => dest.ImageURL, map => map.MapFrom(src => src.ImagemURL));
 
             CreateMap<Produto, ProdutoModel>();
             CreateMap<Segmento, SegmentoModel>();

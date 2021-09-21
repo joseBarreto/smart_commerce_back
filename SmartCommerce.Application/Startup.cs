@@ -39,7 +39,8 @@ namespace SmartCommerce.Application
         {
             services.AddControllers().AddNewtonsoftJson(options => options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);
 
-            services.AddDbContext<SmartCommerceContext>(options => options.UseOracle(Configuration.GetConnectionString("SmartCommerceContext")));
+            //services.AddDbContext<SmartCommerceContext>(options => options.UseOracle(Configuration.GetConnectionString("SmartCommerceContext")));
+            services.AddDbContext<SmartCommerceContext>(options => options.UseSqlServer(Configuration.GetConnectionString("SmartCommerceContext"), b => b.MigrationsAssembly("SmartCommerce.Infra.Data")));
 
 
             #region Settings

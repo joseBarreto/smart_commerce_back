@@ -77,7 +77,7 @@ namespace SmartCommerce.Application.Controllers
         /// <param name="login">Modelo para inserir</param>
         /// <returns>Id do obj</returns>
         [SwaggerResponse(200, "Ok", typeof(Response<int>))]
-        [SwaggerResponse(400, "Bad Request", typeof(string))]
+        [SwaggerResponse(400, "Bad Request", typeof(string))]        
         [HttpPost("Create")]
         public IActionResult Create([FromBody] Login login)
         {
