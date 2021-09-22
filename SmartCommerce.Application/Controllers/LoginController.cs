@@ -6,6 +6,7 @@ using SmartCommerce.Domain.Interfaces;
 using SmartCommerce.Domain.Models;
 using SmartCommerce.Domain.Wrappers;
 using Swashbuckle.AspNetCore.Annotations;
+using System;
 using System.Linq;
 using System.Security.Claims;
 using System.Text;
@@ -76,15 +77,37 @@ namespace SmartCommerce.Application.Controllers
         /// </summary>
         /// <param name="login">Modelo para inserir</param>
         /// <returns>Id do obj</returns>
+#if RELEASE
+        [ApiExplorerSettings(IgnoreApi = true)]
+#endif
+        [AllowAnonymous]
         [SwaggerResponse(200, "Ok", typeof(Response<int>))]
         [SwaggerResponse(400, "Bad Request", typeof(string))]
         [HttpPost("Create")]
-        public IActionResult Create([FromBody] Login login)
+        public IActionResult Create([FromBody] LoginCreateModel login)
         {
             if (login == null)
                 return NotFound();
 
-            return Execute(() => Response<int>.Create(_loginService.Add(login).Id));
+            if (_loginService.ExistsByEmail(login.Email))
+            {
+                var response = new Response<string>
+                {
+                    Message = "E-mail já esta em uso."
+                };
+                return Conflict(response);
+            }
+
+            return Execute(() =>
+            {
+                var newLogin = _mapper.Map<Login>(login);
+                newLogin.Usuario.Status = false;
+                newLogin.Usuario.DataCadastro = DateTime.Now;
+
+
+
+                return Response<int>.Create(_loginService.Add(newLogin).Id);
+            });
         }
 
         /// <summary>

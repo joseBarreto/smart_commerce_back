@@ -8,6 +8,8 @@ namespace SmartCommerce.Domain.Interfaces
 
         Login GetWithIncludesByUsuarioId(int usuarioId);
 
+        bool ExistsByEmail(string email);
+
         string GerarTokenJwt(Login login);
     }
 }

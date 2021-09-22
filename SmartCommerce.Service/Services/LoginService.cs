@@ -31,6 +31,11 @@ namespace SmartCommerce.Service.Services
             return _localRepository.GetWithIncludesByUsuarioId(usuarioId);
         }
 
+        public bool ExistsByEmail(string email)
+        {
+            return _localRepository.ExistsByEmail(email);
+        }
+
         public string GerarTokenJwt(Login login)
         {
             var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_jwtSettings.Key));

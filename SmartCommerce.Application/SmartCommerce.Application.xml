@@ -115,7 +115,7 @@
             <param name="autenticacaoModel"></param>
             <returns></returns>
         </member>
-        <member name="M:SmartCommerce.Application.Controllers.LoginController.Create(SmartCommerce.Domain.Entities.Login)">
+        <member name="M:SmartCommerce.Application.Controllers.LoginController.Create(SmartCommerce.Domain.Models.LoginCreateModel)">
             <summary>
             Insere um novo registro
             </summary>

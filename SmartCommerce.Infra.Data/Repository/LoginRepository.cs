@@ -19,5 +19,7 @@ namespace SmartCommerce.Infra.Data.Repository
         public Login GetWithIncludesByUsuarioId(int usuarioId) => _myOracleContext.Login
                                                                       .Include(l => l.Usuario)
                                                                       .FirstOrDefault(x => x.UsuarioId == usuarioId);
+
+        public bool ExistsByEmail(string email) => _myOracleContext.Login.Any(x => x.Email.ToLower() == email.ToLower());
     }
 }

@@ -7,5 +7,7 @@ namespace SmartCommerce.Domain.Interfaces
         Login GetWithIncludesByEmailAndSenha(string email, string senha);
 
         Login GetWithIncludesByUsuarioId(int usuarioId);
+
+        bool ExistsByEmail(string email);
     }
 }
