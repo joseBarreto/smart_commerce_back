@@ -59,17 +59,8 @@ namespace SmartCommerce.Application.Controllers
                 return Unauthorized();
             }
 
-            var tokenString = _loginService.GerarTokenJwt(login);
-            return Ok(
-                new
-                {
-                    user = new
-                    {
-                        id = login.UsuarioId,
-                        email = login.Email
-                    },
-                    token = tokenString
-                });
+            var tokenRespnse = _loginService.GerarTokenJwt(login);
+            return Ok(tokenRespnse);
         }
 
         /// <summary>

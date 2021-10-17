@@ -2,6 +2,7 @@
 using Microsoft.IdentityModel.Tokens;
 using SmartCommerce.Domain.Entities;
 using SmartCommerce.Domain.Interfaces;
+using SmartCommerce.Domain.Models;
 using SmartCommerce.Domain.Settings;
 using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
@@ -36,8 +37,9 @@ namespace SmartCommerce.Service.Services
             return _localRepository.ExistsByEmail(email);
         }
 
-        public string GerarTokenJwt(Login login)
+        public TokenResponse GerarTokenJwt(Login login)
         {
+            var newDateExpiry = _jwtSettings.NewDateExpiry;
             var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_jwtSettings.Key));
             var credentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256);
             var claims = new List<Claim>
@@ -50,14 +52,24 @@ namespace SmartCommerce.Service.Services
 
             var token = new JwtSecurityToken(issuer: _jwtSettings.Issuer,
                                              audience: _jwtSettings.Audience,
-                                             expires: _jwtSettings.NewDateExpiry,
+                                             expires: newDateExpiry,
                                              signingCredentials: credentials,
                                              claims: claims);
 
             var tokenHandler = new JwtSecurityTokenHandler();
             var stringToken = tokenHandler.WriteToken(token);
+            var tokenRespnse = new TokenResponse()
+            {
+                User = new User()
+                {
+                    Id = login.UsuarioId,
+                    Email = login.Email
+                },
+                Token = stringToken,
+                ExperireIn = newDateExpiry
+            };
 
-            return stringToken;
+            return tokenRespnse;
         }
     }
 }

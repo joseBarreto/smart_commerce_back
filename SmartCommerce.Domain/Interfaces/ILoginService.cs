@@ -1,4 +1,5 @@
 ﻿using SmartCommerce.Domain.Entities;
+using SmartCommerce.Domain.Models;
 
 namespace SmartCommerce.Domain.Interfaces
 {
@@ -10,6 +11,6 @@ namespace SmartCommerce.Domain.Interfaces
 
         bool ExistsByEmail(string email);
 
-        string GerarTokenJwt(Login login);
+        TokenResponse GerarTokenJwt(Login login);
     }
 }
