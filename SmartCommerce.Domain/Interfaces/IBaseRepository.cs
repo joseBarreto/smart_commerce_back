@@ -27,6 +27,14 @@ namespace SmartCommerce.Domain.Interfaces
         /// <param name="id">identificador do registro</param>
         void Delete(int id);
 
+
+        /// <summary>
+        /// Procura um registro com base no Id
+        /// </summary>
+        /// <param name="id">identificador do registro</param>
+        /// <returns></returns>
+        bool Exists(int id);
+
         /// <summary>
         /// Procura uma lista de registros
         /// </summary>

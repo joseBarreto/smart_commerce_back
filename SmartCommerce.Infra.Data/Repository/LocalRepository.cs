@@ -28,5 +28,12 @@ namespace SmartCommerce.Infra.Data.Repository
                                     .ToList();
             return locais;
         }
+
+        public void UpdateTotalVotacao(int localId, int totalVotacao)
+        {
+            var local = Select(localId);
+            local.TotalVotacao = totalVotacao;
+            Update(local);
+        }
     }
 }

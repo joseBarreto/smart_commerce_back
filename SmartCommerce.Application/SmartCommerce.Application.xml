@@ -49,16 +49,11 @@
             Controle de locais
             </summary>
         </member>
-        <member name="F:SmartCommerce.Application.Controllers.LocalController._baseService">
-            <summary>
-            Serviço de Usuário
-            </summary>
-        </member>
         <member name="M:SmartCommerce.Application.Controllers.LocalController.#ctor(SmartCommerce.Domain.Interfaces.ILocalService,AutoMapper.IMapper)">
             <summary>
             Ctr
             </summary>
-            <param name="baseUserService"></param>
+            <param name="baseService"></param>
             <param name="mapper"></param>
         </member>
         <member name="M:SmartCommerce.Application.Controllers.LocalController.Create(SmartCommerce.Domain.Entities.Local)">
@@ -105,7 +100,7 @@
             <summary>
             Ctr
             </summary>
-            <param name="loginService"></param>
+            <param name="baseService"></param>
             <param name="mapper"></param>
         </member>
         <member name="M:SmartCommerce.Application.Controllers.LoginController.Login(SmartCommerce.Domain.Models.Autenticacao)">
@@ -189,7 +184,7 @@
             <summary>
             Ctr
             </summary>
-            <param name="baseUserService"></param>
+            <param name="baseService"></param>
         </member>
         <member name="M:SmartCommerce.Application.Controllers.UsuarioController.Create(SmartCommerce.Domain.Entities.Usuario)">
             <summary>
@@ -216,6 +211,26 @@
             <summary>
             Retorna os dados do usuário autenticado
             </summary>
+            <returns></returns>
+        </member>
+        <member name="T:SmartCommerce.Application.Controllers.VotacaoController">
+            <summary>
+            Controle de votação
+            </summary>
+        </member>
+        <member name="M:SmartCommerce.Application.Controllers.VotacaoController.#ctor(SmartCommerce.Domain.Interfaces.IVotacaoService,SmartCommerce.Domain.Interfaces.IBaseService{SmartCommerce.Domain.Entities.Local},AutoMapper.IMapper)">
+            <summary>
+            Ctr
+            </summary>
+            <param name="baseService"></param>
+            <param name="baseLocalService"></param>
+            <param name="mapper"></param>
+        </member>
+        <member name="M:SmartCommerce.Application.Controllers.VotacaoController.Create(SmartCommerce.Domain.Entities.Votacao)">
+            <summary>
+            Insere um novo registro
+            </summary>
+            <param name="votacao">Modelo para inserir</param>
             <returns></returns>
         </member>
     </members>

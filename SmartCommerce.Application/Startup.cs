@@ -56,6 +56,7 @@ namespace SmartCommerce.Application
             services.AddScoped<IBaseRepository<Login>, BaseRepository<Login>>();
             services.AddScoped<IBaseRepository<Votacao>, BaseRepository<Votacao>>();
             services.AddScoped<ILocalRepository, LocalRepository>();
+            services.AddScoped<IVotacaoRepository, VotacaoRepository>();
             services.AddScoped<ISegmentoRepository, SegmentoRepository>();
             services.AddScoped<ILoginRepository, LoginRepository>();
 
@@ -70,6 +71,7 @@ namespace SmartCommerce.Application
             services.AddScoped<IBaseService<Login>, BaseService<Login>>();
             services.AddScoped<IBaseService<Votacao>, BaseService<Votacao>>();
             services.AddScoped<ILocalService, LocalService>();
+            services.AddScoped<IVotacaoService, VotacaoService>();
             services.AddScoped<ISegmentoService, SegmentoService>();
             services.AddScoped<ILoginService, LoginService>();
 

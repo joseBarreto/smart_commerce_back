@@ -17,6 +17,6 @@ namespace SmartCommerce.Domain.Entities
         public Produto Produto { get; set; }
 
         [Column("DATA_CADASTRO")]
-        public DateTime? DataCadastro { get; set; }
+        public DateTime? DataCadastro { get; set; } = DateTime.Now;
     }
 }

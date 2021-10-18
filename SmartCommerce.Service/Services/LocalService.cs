@@ -6,16 +6,42 @@ namespace SmartCommerce.Service.Services
 {
     public class LocalService : BaseService<Local>, ILocalService
     {
-        public ILocalRepository _localRepository { get; set; }
+        private ILocalRepository _localRepository { get; set; }
+        private IVotacaoRepository _votacaoRepository { get; set; }
 
-        public LocalService(ILocalRepository localRepository) : base(localRepository)
+        public LocalService(ILocalRepository localRepository, IVotacaoRepository votacaoRepository) : base(localRepository)
         {
             _localRepository = localRepository;
+            _votacaoRepository = votacaoRepository;
         }
 
-        public IList<Local> GetWithIncludes(int pageNumber, int pageSize, out int totalRecords)
+        public override Local Add(Local obj)
         {
-            return _localRepository.GetWithIncludes(pageNumber, pageSize, out totalRecords);
+            obj.TotalVotacao = 1;
+            var newLocal = base.Add(obj);
+
+            var votacao = new Votacao()
+            {
+                LocalId = obj.Id,
+                UsuarioId = obj.UsuarioId,
+                Voto = true
+            };
+
+            _votacaoRepository.Insert(votacao);
+
+            return newLocal;
+        }
+
+        public IList<Local> GetWithIncludes(int usuarioId, int pageNumber, int pageSize, out int totalRecords)
+        {
+            var listResult = _localRepository.GetWithIncludes(pageNumber, pageSize, out totalRecords);
+
+            foreach (var item in listResult)
+            {
+                item.Votou = _votacaoRepository.Exists(usuarioId, item.Id);
+            }
+
+            return listResult;
         }
     }
 }

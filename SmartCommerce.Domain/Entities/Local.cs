@@ -47,7 +47,7 @@ namespace SmartCommerce.Domain.Entities
         public string Complemento { get; set; }
 
         [Column("DATA_CADASTRO")]
-        public DateTime DataCadastro { get; set; }
+        public DateTime DataCadastro { get; set; } = DateTime.Now;
 
         [Column("TOTAL_VOTACAO")]
         public int? TotalVotacao { get; set; }
@@ -57,6 +57,9 @@ namespace SmartCommerce.Domain.Entities
 
         [Column("DESCRICAO")]
         public string Descricao { get; set; }
+
+        [NotMapped]
+        public bool Votou { get; set; }
 
         public Usuario Usuario { get; set; }
 

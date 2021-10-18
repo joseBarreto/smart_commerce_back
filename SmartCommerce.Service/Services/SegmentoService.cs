@@ -6,7 +6,7 @@ namespace SmartCommerce.Service.Services
 {
     public class SegmentoService : BaseService<Segmento>, ISegmentoService
     {
-        public ISegmentoRepository _segmentoRepository { get; set; }
+        private ISegmentoRepository _segmentoRepository { get; set; }
 
         public SegmentoService(ISegmentoRepository segmentoRepository) : base(segmentoRepository)
         {

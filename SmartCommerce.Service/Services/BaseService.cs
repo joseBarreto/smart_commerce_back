@@ -13,32 +13,37 @@ namespace SmartCommerce.Service.Services
             _baseRepository = baseRepository;
         }
 
-        public TEntity Add(TEntity obj)
+        public virtual TEntity Add(TEntity obj)
         {
             _baseRepository.Insert(obj);
             return obj;
         }
 
-        public void Delete(int id)
+        public virtual void Delete(int id)
         {
             _baseRepository.Delete(id);
         }
 
-        public IList<TEntity> Get(int pageNumber, int pageSize, out int totalRecords)
+        public virtual IList<TEntity> Get(int pageNumber, int pageSize, out int totalRecords)
         {
             totalRecords = _baseRepository.TotalRecords();
             return _baseRepository.Select(pageNumber, pageSize);
         }
 
-        public TEntity GetById(int id)
+        public virtual TEntity GetById(int id)
         {
             return _baseRepository.Select(id);
         }
 
-        public TEntity Update(TEntity obj)
+        public virtual TEntity Update(TEntity obj)
         {
             _baseRepository.Update(obj);
             return obj;
+        }
+
+        public virtual bool Exists(int id)
+        {
+            return _baseRepository.Exists(id);
         }
     }
 }

@@ -13,7 +13,7 @@ namespace SmartCommerce.Service.Services
 {
     public class LoginService : BaseService<Login>, ILoginService
     {
-        public ILoginRepository _localRepository { get; set; }
+        private ILoginRepository _localRepository { get; set; }
         private readonly JwtSettings _jwtSettings;
 
         public LoginService(ILoginRepository localRepository, IOptions<JwtSettings> jwtSettings) : base(localRepository)

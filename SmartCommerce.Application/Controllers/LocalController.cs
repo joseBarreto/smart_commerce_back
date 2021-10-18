@@ -19,21 +19,17 @@ namespace SmartCommerce.Application.Controllers
     [Route("[controller]")]
     public class LocalController : BaseController
     {
-        /// <summary>
-        /// Serviço de Usuário
-        /// </summary>
         private readonly ILocalService _baseService;
-
         private readonly IMapper _mapper;
 
         /// <summary>
         /// Ctr
         /// </summary>
-        /// <param name="baseUserService"></param>
+        /// <param name="baseService"></param>
         /// <param name="mapper"></param>
-        public LocalController(ILocalService baseUserService, IMapper mapper)
+        public LocalController(ILocalService baseService, IMapper mapper)
         {
-            _baseService = baseUserService;
+            _baseService = baseService;
             _mapper = mapper;
         }
 
@@ -50,7 +46,12 @@ namespace SmartCommerce.Application.Controllers
             if (local == null)
                 return NotFound();
 
-            return Execute(() => Response<int>.Create(_baseService.Add(local).Id));
+            return Execute(() =>
+            {
+                local.UsuarioId = GetCurrentUserId();
+                var response = Response<int>.Create(_baseService.Add(local).Id);
+                return response;
+            });
         }
 
         /// <summary>
@@ -101,7 +102,8 @@ namespace SmartCommerce.Application.Controllers
         {
             return Execute(() =>
             {
-                var local = _baseService.GetWithIncludes(filter.PageNumber, filter.PageSize, out int totalRecords);
+                var userId = GetCurrentUserId();
+                var local = _baseService.GetWithIncludes(userId, filter.PageNumber, filter.PageSize, out int totalRecords);
                 var localModel = _mapper.Map<IList<Local>, IList<LocalModel>>(local);
                 return CreatePagedReponse(localModel, filter, totalRecords);
             });

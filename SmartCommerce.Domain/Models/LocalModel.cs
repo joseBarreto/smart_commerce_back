@@ -10,6 +10,7 @@ namespace SmartCommerce.Domain.Models
         public string ImageURL { get; set; }
         public DateTime DataCadastro { get; set; }
         public int TotalVotacao { get; set; }
+        public bool Votou { get; set; }
 
         public EnderecoModel Endereco { get; set; }
 

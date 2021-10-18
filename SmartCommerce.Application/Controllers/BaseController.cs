@@ -4,7 +4,9 @@ using SmartCommerce.Domain.Filter;
 using SmartCommerce.Domain.Wrappers;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Net;
+using System.Security.Claims;
 
 namespace SmartCommerce.Application.Controllers
 {
@@ -13,6 +15,12 @@ namespace SmartCommerce.Application.Controllers
     /// </summary>
     public class BaseController : ControllerBase
     {
+        internal int GetCurrentUserId()
+        {
+            _ = int.TryParse(User.Claims.FirstOrDefault(x => x.Type == ClaimTypes.NameIdentifier)?.Value, out int userId);
+            return userId;
+        }
+
         /// <summary>
         /// Executa uma function
         /// </summary>

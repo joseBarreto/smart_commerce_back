@@ -4,8 +4,6 @@ using SmartCommerce.Domain.Entities;
 using SmartCommerce.Domain.Interfaces;
 using SmartCommerce.Domain.Wrappers;
 using Swashbuckle.AspNetCore.Annotations;
-using System.Linq;
-using System.Security.Claims;
 
 namespace SmartCommerce.Application.Controllers
 {
@@ -22,10 +20,10 @@ namespace SmartCommerce.Application.Controllers
         /// <summary>
         /// Ctr
         /// </summary>
-        /// <param name="baseUserService"></param>
-        public UsuarioController(IBaseService<Usuario> baseUserService)
+        /// <param name="baseService"></param>
+        public UsuarioController(IBaseService<Usuario> baseService)
         {
-            _baseService = baseUserService;
+            _baseService = baseService;
         }
 
         /// <summary>
@@ -89,7 +87,7 @@ namespace SmartCommerce.Application.Controllers
         [HttpGet()]
         public IActionResult Get()
         {
-            _ = int.TryParse(User.Claims.FirstOrDefault(x => x.Type == ClaimTypes.NameIdentifier)?.Value, out int userId);
+            var userId = GetCurrentUserId();
 
             if (userId <= 0)
                 return NotFound();

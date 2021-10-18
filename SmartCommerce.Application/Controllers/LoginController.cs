@@ -8,7 +8,6 @@ using SmartCommerce.Domain.Wrappers;
 using Swashbuckle.AspNetCore.Annotations;
 using System;
 using System.Linq;
-using System.Security.Claims;
 using System.Text;
 
 namespace SmartCommerce.Application.Controllers
@@ -21,17 +20,17 @@ namespace SmartCommerce.Application.Controllers
     [Route("[controller]")]
     public class LoginController : BaseController
     {
-        private readonly ILoginService _loginService;
+        private readonly ILoginService _baseService;
         private readonly IMapper _mapper;
 
         /// <summary>
         /// Ctr
         /// </summary>
-        /// <param name="loginService"></param>
+        /// <param name="baseService"></param>
         /// <param name="mapper"></param>
-        public LoginController(ILoginService loginService, IMapper mapper)
+        public LoginController(ILoginService baseService, IMapper mapper)
         {
-            _loginService = loginService;
+            _baseService = baseService;
             _mapper = mapper;
         }
 
@@ -53,13 +52,13 @@ namespace SmartCommerce.Application.Controllers
                 return Unauthorized();
             }
 
-            var login = _loginService.GetWithIncludesByEmailAndSenha(autenticacaoModel.Email, autenticacaoModel.Senha);
+            var login = _baseService.GetWithIncludesByEmailAndSenha(autenticacaoModel.Email, autenticacaoModel.Senha);
             if (login == null)
             {
                 return Unauthorized();
             }
 
-            var tokenRespnse = _loginService.GerarTokenJwt(login);
+            var tokenRespnse = _baseService.GerarTokenJwt(login);
             return Ok(tokenRespnse);
         }
 
@@ -80,7 +79,7 @@ namespace SmartCommerce.Application.Controllers
             if (login == null)
                 return NotFound();
 
-            if (_loginService.ExistsByEmail(login.Email))
+            if (_baseService.ExistsByEmail(login.Email))
             {
                 var response = new Response<string>
                 {
@@ -95,9 +94,7 @@ namespace SmartCommerce.Application.Controllers
                 newLogin.Usuario.Status = false;
                 newLogin.Usuario.DataCadastro = DateTime.Now;
 
-
-
-                return Response<int>.Create(_loginService.Add(newLogin).Id);
+                return Response<int>.Create(_baseService.Add(newLogin).Id);
             });
         }
 
@@ -130,14 +127,14 @@ namespace SmartCommerce.Application.Controllers
         [HttpGet()]
         public IActionResult Get()
         {
-            _ = int.TryParse(User.Claims.FirstOrDefault(x => x.Type == ClaimTypes.NameIdentifier)?.Value, out int userId);
+            var userId = GetCurrentUserId();
 
             if (userId <= 0)
                 return NotFound();
 
             return Execute(() =>
             {
-                return Response<LoginModel>.Create(_mapper.Map<LoginModel>(_loginService.GetWithIncludesByUsuarioId(userId)));
+                return Response<LoginModel>.Create(_mapper.Map<LoginModel>(_baseService.GetWithIncludesByUsuarioId(userId)));
             });
         }
     }

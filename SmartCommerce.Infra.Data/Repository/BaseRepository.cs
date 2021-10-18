@@ -33,6 +33,11 @@ namespace SmartCommerce.Infra.Data.Repository
             _myOracleContext.SaveChanges();
         }
 
+        public bool Exists(int id)
+        {
+            return _myOracleContext.Set<TEntity>().Any(x => x.Id == id);
+        }
+
         public IList<TEntity> Select(int pageNumber, int pageSize)
         {
             return _myOracleContext.Set<TEntity>()

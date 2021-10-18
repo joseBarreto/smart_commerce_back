@@ -40,5 +40,12 @@ namespace SmartCommerce.Domain.Interfaces
         /// <param name="id">Identificador do registro</param>
         /// <returns></returns>
         TEntity GetById(int id);
+
+        /// <summary>
+        /// Verifica se existe o registro com base no ID
+        /// </summary>
+        /// <param name="id">Identificador do registro</param>
+        /// <returns></returns>
+        bool Exists(int id);
     }
 }
