@@ -5,6 +5,7 @@ namespace SmartCommerce.Domain.Models
 {
     public class LocalModel
     {
+        public int Id { get; set; }
         public string Nome { get; set; }
         public string Descricao { get; set; }
         public string ImageURL { get; set; }
