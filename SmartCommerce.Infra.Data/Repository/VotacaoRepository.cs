@@ -24,7 +24,7 @@ namespace SmartCommerce.Infra.Data.Repository
 
         public bool Exists(int usuarioId, int localId)
         {
-            return _myOracleContext.Votacao.Any(x => x.UsuarioId == usuarioId && x.LocalId == localId);
+            return _myOracleContext.Votacao.Any(x => x.UsuarioId == usuarioId && x.LocalId == localId && x.Voto);
         }
     }
 }
