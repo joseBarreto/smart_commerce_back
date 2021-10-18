@@ -19,7 +19,7 @@ namespace SmartCommerce.Infra.Data.Repository
 
         public int GetCountByLocalId(int localId)
         {
-            return _myOracleContext.Votacao.Count(x => x.LocalId == localId);
+            return _myOracleContext.Votacao.Count(x => x.LocalId == localId && x.Voto);
         }
 
         public bool Exists(int usuarioId, int localId)
