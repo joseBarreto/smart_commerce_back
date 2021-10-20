@@ -33,9 +33,29 @@ namespace SmartCommerce.Infra.Data.Mapping
                 .ForMember(dest => dest.Endereco, map => map.MapFrom(src => src))
                 .ForMember(dest => dest.ImageURL, map => map.MapFrom(src => src.ImagemURL));
 
+            CreateMap<Local, LocalSimpleModel>()
+                .ForMember(dest => dest.Endereco, map => map.MapFrom(src => src))
+                .ForMember(dest => dest.ImageURL, map => map.MapFrom(src => src.ImagemURL));
+
+            CreateMap<LocalSimpleModel, Local>()
+               .ForMember(dest => dest.ImagemURL, map => map.MapFrom(src => src.ImageURL))
+               //.ForMember(dest => dest, map => map.MapFrom(src => src.Endereco));
+               .ForMember(dest => dest.Bairro, map => map.MapFrom(src => src.Endereco.Bairro))
+               .ForMember(dest => dest.Cep, map => map.MapFrom(src => src.Endereco.Cep))
+               .ForMember(dest => dest.Cidade, map => map.MapFrom(src => src.Endereco.Cidade))
+               .ForMember(dest => dest.Complemento, map => map.MapFrom(src => src.Endereco.Complemento))
+               .ForMember(dest => dest.Latitude, map => map.MapFrom(src => src.Endereco.Latitude))
+               .ForMember(dest => dest.Logradouro, map => map.MapFrom(src => src.Endereco.Logradouro))
+               .ForMember(dest => dest.Longitude, map => map.MapFrom(src => src.Endereco.Longitude))
+               .ForMember(dest => dest.Numero, map => map.MapFrom(src => src.Endereco.Numero))
+               .ForMember(dest => dest.Uf, map => map.MapFrom(src => src.Endereco.Uf));
+
             CreateMap<Produto, ProdutoModel>();
+            CreateMap<ProdutoModel, Produto>();
+
             CreateMap<Segmento, SegmentoModel>();
             CreateMap<Local, EnderecoModel>();
+            CreateMap<EnderecoModel, Local>();
 
 
 

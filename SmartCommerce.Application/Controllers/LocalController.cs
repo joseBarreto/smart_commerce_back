@@ -36,18 +36,20 @@ namespace SmartCommerce.Application.Controllers
         /// <summary>
         /// Insere um novo registro
         /// </summary>
-        /// <param name="local">Modelo para inserir</param>
+        /// <param name="localModel">Modelo para inserir</param>
         /// <returns>Id do obj</returns>
         [SwaggerResponse(200, "Ok", typeof(Response<int>))]
         [SwaggerResponse(400, "Bad Request", typeof(string))]
         [HttpPost]
-        public IActionResult Create([FromBody] Local local)
+        public IActionResult Create([FromBody] LocalSimpleModel localModel)
         {
-            if (local == null)
+            if (localModel == null)
                 return NotFound();
 
             return Execute(() =>
             {
+                var local = _mapper.Map<LocalSimpleModel, Local>(localModel);
+
                 local.UsuarioId = GetCurrentUserId();
                 var response = Response<int>.Create(_baseService.Add(local).Id);
                 return response;

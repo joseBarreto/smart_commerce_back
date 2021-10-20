@@ -56,11 +56,11 @@
             <param name="baseService"></param>
             <param name="mapper"></param>
         </member>
-        <member name="M:SmartCommerce.Application.Controllers.LocalController.Create(SmartCommerce.Domain.Entities.Local)">
+        <member name="M:SmartCommerce.Application.Controllers.LocalController.Create(SmartCommerce.Domain.Models.LocalSimpleModel)">
             <summary>
             Insere um novo registro
             </summary>
-            <param name="local">Modelo para inserir</param>
+            <param name="localModel">Modelo para inserir</param>
             <returns>Id do obj</returns>
         </member>
         <member name="M:SmartCommerce.Application.Controllers.LocalController.Update(SmartCommerce.Domain.Entities.Local)">
@@ -128,6 +128,25 @@
             Retorna os dados do usuário autenticado
             </summary>
             <returns></returns>
+        </member>
+        <member name="T:SmartCommerce.Application.Controllers.ProdutoController">
+            <summary>
+            Controle de produtos
+            </summary>
+        </member>
+        <member name="M:SmartCommerce.Application.Controllers.ProdutoController.#ctor(SmartCommerce.Domain.Interfaces.IProdutoService,AutoMapper.IMapper)">
+            <summary>
+            Ctr
+            </summary>
+            <param name="baseService"></param>
+            <param name="mapper"></param>
+        </member>
+        <member name="M:SmartCommerce.Application.Controllers.ProdutoController.Create(SmartCommerce.Domain.Models.ProdutoModel)">
+            <summary>
+            Insere um novo registro
+            </summary>
+            <param name="produtoModel">Modelo para inserir</param>
+            <returns>Id do obj</returns>
         </member>
         <member name="T:SmartCommerce.Application.Controllers.SegmentoController">
             <summary>

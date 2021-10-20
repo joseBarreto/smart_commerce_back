@@ -50,6 +50,7 @@ namespace SmartCommerce.Application
             #region repository
 
             services.AddScoped<IBaseRepository<Local>, BaseRepository<Local>>();
+            services.AddScoped<IBaseRepository<LocalProduto>, BaseRepository<LocalProduto>>();
             services.AddScoped<IBaseRepository<Produto>, BaseRepository<Produto>>();
             services.AddScoped<IBaseRepository<Segmento>, BaseRepository<Segmento>>();
             services.AddScoped<IBaseRepository<Usuario>, BaseRepository<Usuario>>();
@@ -65,6 +66,7 @@ namespace SmartCommerce.Application
             #region service
 
             services.AddScoped<IBaseService<Local>, BaseService<Local>>();
+            services.AddScoped<IBaseService<LocalProduto>, BaseService<LocalProduto>>();
             services.AddScoped<IBaseService<Produto>, BaseService<Produto>>();
             services.AddScoped<IBaseService<Segmento>, BaseService<Segmento>>();
             services.AddScoped<IBaseService<Usuario>, BaseService<Usuario>>();
@@ -73,6 +75,7 @@ namespace SmartCommerce.Application
             services.AddScoped<ILocalService, LocalService>();
             services.AddScoped<IVotacaoService, VotacaoService>();
             services.AddScoped<ISegmentoService, SegmentoService>();
+            services.AddScoped<IProdutoService, ProdutoService>();
             services.AddScoped<ILoginService, LoginService>();
 
             #endregion service
