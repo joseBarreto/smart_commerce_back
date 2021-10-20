@@ -18,7 +18,7 @@ namespace SmartCommerce.Domain.Entities
         public string Nome { get; set; }
 
         [Column("CEP")]
-        [StringLength(8, MinimumLength = 8, ErrorMessage = "O valor para {0} tem que ser igual á 8 caracteres")]
+        [StringLength(9, MinimumLength = 0, ErrorMessage = "O valor para {0} tem que ser igual á 8 caracteres")]
         public string Cep { get; set; }
 
         [Column("LATITUDE")]
@@ -31,7 +31,7 @@ namespace SmartCommerce.Domain.Entities
         public string Logradouro { get; set; }
 
         [Column("NUMERO")]
-        public int Numero { get; set; }
+        public int? Numero { get; set; }
 
         [Column("BAIRRO")]
         public string Bairro { get; set; }
