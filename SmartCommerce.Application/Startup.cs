@@ -60,11 +60,9 @@ namespace SmartCommerce.Application
             //.AddApplicationInsightsPublisher(); //nuget: AspNetCore.HealthChecks.Publisher.ApplicationInsights
 
             services
-                .AddHealthChecksUI(setupSettings: setup =>
-                {
-                    setup.AddHealthCheckEndpoint("PollManager", "/healthchecks");
-                })
-                .AddSqlServerStorage(Configuration.GetConnectionString("SmartCommerceContext")); // or .AddInMemoryStorage()
+                .AddHealthChecksUI()
+                .AddInMemoryStorage();
+
             #endregion
 
             #region Settings
