@@ -1,10 +1,13 @@
 using AutoMapper;
+using HealthChecks.UI.Client;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Diagnostics.HealthChecks;
 using Microsoft.Extensions.Hosting;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
@@ -36,10 +39,33 @@ namespace SmartCommerce.Application
 
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddControllers().AddNewtonsoftJson(options => options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);
+            services
+                .AddControllers()
+                .AddNewtonsoftJson(options => options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);
 
             // services.AddDbContext<SmartCommerceContext>(options => options.UseOracle(Configuration.GetConnectionString("SmartCommerceContext")))
-            services.AddDbContext<SmartCommerceContext>(options => options.UseSqlServer(Configuration.GetConnectionString("SmartCommerceContext")));
+            services
+                .AddDbContext<SmartCommerceContext>(options => options.UseSqlServer(Configuration.GetConnectionString("SmartCommerceContext")));
+
+            #region health checks
+            services
+                .AddHealthChecks()
+                .AddCheck("Self", () => HealthCheckResult.Healthy())
+                .AddCheck("ServiceBus", () => HealthCheckResult.Healthy(), new[] { "services" })
+                .AddCheck("Redis", () => HealthCheckResult.Healthy(), new[] { "services" })
+                .AddCheck("RabbitMQ", () => HealthCheckResult.Healthy(), new[] { "services" })
+                .AddDbContextCheck<SmartCommerceContext>(tags: new[] { "services" });
+
+            //nuget: Microsoft.Extensions.Diagnostics.HealthChecks.EntityFrameworkCore
+            //.AddApplicationInsightsPublisher(); //nuget: AspNetCore.HealthChecks.Publisher.ApplicationInsights
+
+            services
+                .AddHealthChecksUI(setupSettings: setup =>
+                {
+                    setup.AddHealthCheckEndpoint("PollManager", "/healthchecks");
+                })
+                .AddSqlServerStorage(Configuration.GetConnectionString("SmartCommerceContext")); // or .AddInMemoryStorage()
+            #endregion
 
             #region Settings
 
@@ -180,6 +206,19 @@ namespace SmartCommerce.Application
 
             app.UseAuthentication();
             app.UseAuthorization();
+
+            app.UseHealthChecks("/healthchecks", new HealthCheckOptions
+            {
+                Predicate = _ => true,
+                ResponseWriter = UIResponseWriter.WriteHealthCheckUIResponse //nuget: AspNetCore.HealthChecks.UI.Client
+            });
+
+            //nuget: AspNetCore.HealthChecks.UI
+            app.UseHealthChecksUI(options =>
+            {
+                options.UIPath = "/healthchecks-ui";
+                options.ApiPath = "/healthchecks-ui-api";
+            });
 
             app.UseEndpoints(endpoints =>
             {

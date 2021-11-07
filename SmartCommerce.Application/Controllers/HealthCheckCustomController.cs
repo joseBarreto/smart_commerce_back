@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Diagnostics.HealthChecks;
 using SmartCommerce.Domain.Entities;
 using SmartCommerce.Domain.Interfaces;
 using System.Linq;
@@ -12,7 +13,7 @@ namespace SmartCommerce.Application.Controllers
     [ApiController]
     [Route("[controller]")]
     [ApiExplorerSettings(IgnoreApi = true)]
-    public class HealthCheckController : BaseController
+    public class HealthCheckCustomController : BaseController
     {
         private readonly IBaseService<Usuario> _baseUserService;
 
@@ -20,7 +21,7 @@ namespace SmartCommerce.Application.Controllers
         /// Ctr
         /// </summary>
         /// <param name="baseUserService"></param>
-        public HealthCheckController(IBaseService<Usuario> baseUserService)
+        public HealthCheckCustomController(IBaseService<Usuario> baseUserService)
         {
             _baseUserService = baseUserService;
         }
@@ -34,11 +35,14 @@ namespace SmartCommerce.Application.Controllers
         {
             try
             {
-                return Execute(() => _baseUserService.Get(1, 1, out int totalItens).Any());
+                return Execute(() => _baseUserService.Get(1, 1, out int totalItens).Any() ?
+                HealthCheckResult.Healthy()
+                :
+                HealthCheckResult.Unhealthy());
             }
-            catch (System.Exception ex)
+            catch
             {
-                return StatusCode(StatusCodes.Status500InternalServerError, ex.ToString());
+                return StatusCode(StatusCodes.Status500InternalServerError, HealthCheckResult.Unhealthy());
             }
         }
     }

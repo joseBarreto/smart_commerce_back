@@ -16,18 +16,18 @@
             <param name="func">função para execução</param>
             <returns>Ok para sucesso e BadRequest para erros</returns>
         </member>
-        <member name="T:SmartCommerce.Application.Controllers.HealthCheckController">
+        <member name="T:SmartCommerce.Application.Controllers.HealthCheckCustomController">
             <summary>
              HealthCheck da aplicação
             </summary>
         </member>
-        <member name="M:SmartCommerce.Application.Controllers.HealthCheckController.#ctor(SmartCommerce.Domain.Interfaces.IBaseService{SmartCommerce.Domain.Entities.Usuario})">
+        <member name="M:SmartCommerce.Application.Controllers.HealthCheckCustomController.#ctor(SmartCommerce.Domain.Interfaces.IBaseService{SmartCommerce.Domain.Entities.Usuario})">
             <summary>
             Ctr
             </summary>
             <param name="baseUserService"></param>
         </member>
-        <member name="M:SmartCommerce.Application.Controllers.HealthCheckController.Index">
+        <member name="M:SmartCommerce.Application.Controllers.HealthCheckCustomController.Index">
              <summary>
             
              </summary>
