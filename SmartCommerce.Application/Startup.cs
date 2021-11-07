@@ -60,10 +60,7 @@ namespace SmartCommerce.Application
             //.AddApplicationInsightsPublisher(); //nuget: AspNetCore.HealthChecks.Publisher.ApplicationInsights
 
             services
-                 .AddHealthChecksUI(setupSettings: setup =>
-                 {
-                     setup.AddHealthCheckEndpoint("PollManager", "/healthchecks");
-                 })
+                 .AddHealthChecksUI()
                 .AddInMemoryStorage();
 
             #endregion
@@ -218,10 +215,7 @@ namespace SmartCommerce.Application
             app.UseHealthChecksUI(options =>
             {
                 options.UIPath = "/healthchecks-ui";
-                options.ApiPath = "/healthchecks-ui-api";
-                options.UseRelativeApiPath = true;
-                options.UseRelativeResourcesPath = true;
-                options.UseRelativeWebhookPath = true;
+                options.ApiPath = "/healthchecks-ui-api";                
             });
 
             app.UseEndpoints(endpoints =>

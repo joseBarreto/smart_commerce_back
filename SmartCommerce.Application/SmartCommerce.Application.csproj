@@ -41,5 +41,5 @@
     <Resource Include="SmartCommerce.Application.xml" />
   </ItemGroup>
 
-  <ProjectExtensions><VisualStudio><UserProperties appsettings_1json__JsonSchema="" /></VisualStudio></ProjectExtensions>
+  <ProjectExtensions><VisualStudio><UserProperties appsettings_1example_1json__JsonSchema="https://appsemble.app/api.json" appsettings_1json__JsonSchema="" /></VisualStudio></ProjectExtensions>
 </Project>
